@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  // Layout of per item in sidebar
+  .silder-item {
+    @apply w-full border-[1px] border-main-300 bg-main-200  dark:border-main-700 dark:bg-neutral-800 my-2 rounded-lg pointer-events-auto overflow-hidden;
+
+    header {
+      @apply text-[14px] dark:text-main-400 font-semibold flex justify-between items-center p-3;
+    }
+  }
+}

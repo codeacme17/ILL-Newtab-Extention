@@ -35,7 +35,8 @@ export default class Search extends Component {
             </span>
             <input
               type="text"
-              className="mt-10 w-[560px] h-10 px-12 text-dark-300 outline-none rounded-3xl focus:rounded-md ease-in-out duration-200 text-md   dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:text-dark-100 dark:placeholder:text-main-600"
+              className="mt-10 w-[560px] h-10 px-12 
+                         text-dark-300 outline-none rounded-3xl focus:rounded-md ease-in-out duration-200 text-md dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:text-dark-100 dark:placeholder:text-main-600 transition-[border]"
               placeholder="Search You Want"
               ref={this.InputRef}
               onKeyUp={this.search}
