@@ -5,14 +5,14 @@ import MoonIcon from "../../icons/moon";
 export default class Topbar extends Component {
   constructor() {
     super();
+
     this.state = {
-      darkMode: false,
+      darkMode: true,
     };
   }
 
-  componentDidMount = () => {};
-
-  switchDarkMood = () => {
+  // Dark Mode Hanlder
+  switchDarkMode = () => {
     this.setState((state) => {
       if (state.darkMode) return { darkMode: false };
       else return { darkMode: true };
@@ -30,13 +30,14 @@ export default class Topbar extends Component {
   render = () => {
     return (
       <section className="flex flex-row-reverse pt-2 pr-4 fixed top-0 w-full">
+        {/* Switch Dark Mode Button */}
         <button
-          className="border-[1px] bg-gray-100 shadow-inner dark:bg-zinc-700 rounded-full w-12 relative h-6"
-          onClick={this.switchDarkMood}
+          className=" bg-gray-100 shadow-inner dark:bg-zinc-700 rounded-full w-12 relative h-6"
+          onClick={this.switchDarkMode}
         >
           <div
-            className={`p-0.5 rounded-full  w-[20px] h-[20px] flex justify-center items-center ease-in duration-200 
-                        ${this.state.darkMode ? "translate-x-6" : "translate-x-0"}`}
+            className={`p-0.5 rounded-full w-[20px] h-[20px] flex justify-center items-center ease-in duration-200 
+                        ${this.state.darkMode ? "translate-x-6" : "translate-x-1"}`}
           >
             {this.state.darkMode ? <SunIcon /> : <MoonIcon />}
           </div>

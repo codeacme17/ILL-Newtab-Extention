@@ -13,7 +13,7 @@ export default class SunIcon extends Component {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="feather feather-sun stroke-zinc-200 mx-0.5"
+        className="feather feather-sun stroke-zinc-200 mr-0.5"
       >
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
