@@ -11,6 +11,18 @@ export default class Topbar extends Component {
     };
   }
 
+  // Get dark mode state from localstorage
+  componentDidMount = () => {
+    const localDarkMode = localStorage.getItem("dark");
+    if (localDarkMode && localDarkMode === "false") {
+      document.documentElement.classList.remove("dark");
+      this.setState({ darkMode: false });
+    } else if (localDarkMode && localDarkMode === "true") {
+      document.documentElement.classList.add("dark");
+      this.setState({ darkMode: true });
+    }
+  };
+
   // Dark Mode Hanlder
   switchDarkMode = () => {
     this.setState((state) => {
@@ -21,18 +33,20 @@ export default class Topbar extends Component {
     if (this.state.darkMode) {
       document.documentElement.classList.remove("dark");
       this.setState({ darkMode: false });
+      localStorage.setItem("dark", "false");
     } else {
       document.documentElement.classList.add("dark");
       this.setState({ darkMode: true });
+      localStorage.setItem("dark", "true");
     }
   };
 
   render = () => {
     return (
-      <section className="flex flex-row-reverse pt-2 pr-4 fixed top-0 w-full">
+      <section className="flex flex-row-reverse pt-5 px-7 fixed top-0 w-full">
         {/* Switch Dark Mode Button */}
         <button
-          className=" bg-gray-100 shadow-inner dark:bg-zinc-700 rounded-full w-12 relative h-6"
+          className="bg-gray-100 shadow-inner dark:bg-main-700 rounded-full w-12 relative h-6"
           onClick={this.switchDarkMode}
         >
           <div

@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import Home from "./components/Home";
+import Searchbar from "./components/Searchbar";
 import Topbar from "./components/Topbar";
+import Sidebar from "./components/Sidebar";
 
 export default class App extends Component {
-  componentDidMount = () => {
-    document.documentElement.classList.add("dark");
-  };
-
   render() {
     return (
-      <div className="App bg-dark-100 h-[100vh] dark:bg-zinc-900">
+      <div className="App">
         <Topbar />
-        <Home />
+        <Searchbar />
+        <Sidebar />
       </div>
     );
   }

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html.dark {
+  background-color: #27272a;
+}
+
 body {
   font-family: "poppins";
 }

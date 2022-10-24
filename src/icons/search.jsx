@@ -13,7 +13,7 @@ export default class searchIcon extends Component {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="feather feather-search dark:stroke-zinc-400"
+        className="feather feather-search dark:stroke-main-400"
       >
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
