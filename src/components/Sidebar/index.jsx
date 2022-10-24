@@ -4,7 +4,12 @@ import Calendar from "./Calendar";
 export default class Sidebar extends Component {
   render() {
     return (
-      <section className="h-full pointer-events-none w-[350px] pr-3 fixed right-0 top-0 flex flex-col-reverse">
+      <section className="silder w-[370px] pr-3 pl-2 mt-16 fixed right-0 top-0 flex flex-col-reverse overflow-y-scroll overflow-x-auto">
+        <Calendar />
+        <Calendar />
+        <Calendar />
+        <Calendar />
+        <Calendar />
         <Calendar />
       </section>
     );

@@ -4,6 +4,7 @@ import ArrowupIcon from "../../../icons/arrowup";
 export default class Calendar extends Component {
   constructor() {
     super();
+
     this.state = {
       nowDate: "10.24 Monday",
       detailVisible: false,
@@ -33,10 +34,10 @@ export default class Calendar extends Component {
         </header>
 
         <div
-          className={`bg-main-100 dark:text-main-200 dark:bg-main-700 ease-in-out duration-300 transition-[height,padding]  
+          className={`bg-main-100 dark:text-main-200 dark:bg-main-700 ease-in-out duration-300 overflow-hidden rounded-b-md
                       ${detailVisible ? "h-60 p-3" : "h-0 p-0"}`}
         >
-          123123
+          <div>123123</div>
         </div>
       </section>
     );

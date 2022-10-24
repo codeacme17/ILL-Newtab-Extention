@@ -1,5 +1,8 @@
 @import "./tailwind.scss";
 
+html {
+  transition: background-color 0.3s ease-in-out;
+}
 html.dark {
   background-color: #27272a;
 }
