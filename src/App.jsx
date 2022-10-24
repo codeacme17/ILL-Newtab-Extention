@@ -1,21 +1,14 @@
+import React, { Component } from "react";
 import Home from "./components/Home";
+import Topbar from "./components/Topbar";
 
-export default function App() {
-  if (
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
+export default class App extends Component {
+  render() {
+    return (
+      <div className="App bg-dark-100 h-[100vh] dark:bg-zinc-900">
+        <Topbar />
+        <Home />
+      </div>
+    );
   }
-  localStorage.theme = "light";
-  localStorage.theme = "dark";
-  localStorage.removeItem("theme");
-
-  return (
-    <div className="App bg-dark-100 h-[100vh]">
-      <Home />˝
-    </div>
-  );
 }

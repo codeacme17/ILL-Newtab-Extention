@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class searchIcon extends Component {
+export default class MoonIcon extends Component {
   render() {
     return (
       <svg
@@ -13,10 +13,9 @@ export default class searchIcon extends Component {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="feather feather-search dark:stroke-zinc-400"
+        className="feather feather-sun stroke-slate-800 ml-0.5"
       >
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     );
   }
