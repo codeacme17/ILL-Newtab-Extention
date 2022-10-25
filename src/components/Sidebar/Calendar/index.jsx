@@ -6,7 +6,7 @@ export default class Calendar extends Component {
     super();
 
     this.state = {
-      nowDate: "10.24 Monday",
+      nowDate: "Oct 24,2022 Monday",
       detailVisible: false,
     };
   }
@@ -22,21 +22,17 @@ export default class Calendar extends Component {
 
     return (
       <section className="silder-item">
-        <header>
+        <div className="header">
           {nowDate}
           <button
-            className={`border-[1px] border-main-400 dark:border-main-500 rounded-md
-                        ${detailVisible ? "rotate-0" : "rotate-180"}`}
+            className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}
             onClick={this.switchDetailVisible}
           >
             <ArrowupIcon />
           </button>
-        </header>
+        </div>
 
-        <div
-          className={`bg-main-100 dark:text-main-200 dark:bg-main-700 ease-in-out duration-300 overflow-hidden rounded-b-md
-                      ${detailVisible ? "h-60 p-3" : "h-0 p-0"}`}
-        >
+        <div className={`content ${detailVisible ? "h-60 p-3" : "h-0 p-0"}`}>
           <div>123123</div>
         </div>
       </section>

@@ -9,8 +9,15 @@
     .silder-item {
       @apply w-full border-[1px] shadow-lg border-main-300 bg-main-200  dark:border-main-700 dark:bg-neutral-800 my-2 rounded-lg pointer-events-auto;
 
-      header {
+      .header {
         @apply text-[14px] dark:text-main-400 font-semibold flex justify-between items-center p-3;
+        .draw-btn {
+          @apply border-[1px] border-main-400 dark:border-main-500 rounded-md;
+        }
+      }
+
+      .content {
+        @apply bg-main-100 dark:text-main-200 dark:bg-main-700 ease-in-out duration-300 transition-all overflow-hidden rounded-b-md;
       }
     }
   }
