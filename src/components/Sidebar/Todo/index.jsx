@@ -64,7 +64,9 @@ export default class Todo extends Component {
         <div className="content">
           <div className="p-3 pb-3 divide-y divide-dashed">
             {!todoList.length ? (
-              <div className="mb-2">You can add some todo</div>
+              <div className="mb-2 text-sm italic text-main-600 dark:text-main-400">
+                You can add some todos in here
+              </div>
             ) : (
               todoList.map((item) => {
                 return (
