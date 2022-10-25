@@ -62,7 +62,7 @@ export default class Topbar extends Component {
             className={`p-0.5 rounded-full w-[20px] h-[20px] flex justify-center items-center ease-in duration-200 
                         ${darkMode ? "translate-x-6" : "translate-x-1"}`}
           >
-            {darkMode ? <SunIcon /> : <MoonIcon />}
+            {darkMode ? <MoonIcon /> : <SunIcon />}
           </div>
         </button>
       </section>

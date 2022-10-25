@@ -12,10 +12,11 @@ export default class Sidebar extends Component {
           axis="y"
           handle=".drag-handle"
           bounds="parent"
+          cancel="button"
           defaultPosition={{ x: 0, y: 0 }}
           grid={[10, 1]}
         >
-          <div className="calendar">
+          <div>
             <Calendar />
           </div>
         </Draggable>
@@ -24,9 +25,9 @@ export default class Sidebar extends Component {
           axis="y"
           handle=".drag-handle"
           bounds="parent"
+          cancel="button"
           defaultPosition={{ x: 0, y: 0 }}
           grid={[10, 1]}
-          cancel=".calendar"
         >
           <div>
             <Todo />
