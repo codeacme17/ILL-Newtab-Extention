@@ -5,12 +5,15 @@
 @layer components {
   .silder {
     height: calc(100% - 4rem);
+    transition: background-color 0.2s ease-in-out;
+    @apply w-[370px] pr-1 p-2 mt-16 fixed right-0 top-0 overflow-y-scroll rounded-lg;
+
     // Layout of per item in sidebar
     .silder-item {
       @apply w-full border-[1px] shadow-lg border-main-300 bg-main-200  dark:border-main-700 dark:bg-neutral-800 my-2 rounded-lg pointer-events-auto;
 
       .header {
-        @apply text-[14px] dark:text-main-400 font-semibold flex justify-between items-center p-3;
+        @apply text-[14px] dark:text-main-400 font-semibold flex justify-between items-center p-3 select-none cursor-move;
         .draw-btn {
           @apply border-[1px] border-main-400 dark:border-main-500 rounded-md;
         }

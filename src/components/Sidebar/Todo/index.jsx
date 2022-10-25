@@ -50,7 +50,7 @@ export default class Todo extends Component {
 
     return (
       <section className="silder-item">
-        <div className="header">
+        <div className="header drag-handle">
           TODO
           <button
             className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}
@@ -69,7 +69,7 @@ export default class Todo extends Component {
               todoList.map((item) => {
                 return (
                   <label
-                    className="flex justify-between cursor-pointer py-2  border-main-400"
+                    className="flex justify-between cursor-pointer py-2 px-3 border-main-400"
                     key={item.id}
                   >
                     <div className="font-bold">{item.title}</div>
@@ -97,7 +97,7 @@ export default class Todo extends Component {
           >
             <input
               type="text"
-              className="shadow-inner outline-none border-[1px] rounded-md px-4 py-1 text-sm dark:bg-main-600 dark:border-main-500 w-full"
+              className="shadow-inner outline-none border-[1px] rounded-md px-3 py-1.5 text-sm dark:bg-main-600 dark:border-main-500 w-full"
               onKeyUp={(e) => this.addTodo(e)}
               disabled={todoList.length > 4}
             />

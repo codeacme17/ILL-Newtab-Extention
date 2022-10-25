@@ -22,7 +22,7 @@ export default class Calendar extends Component {
 
     return (
       <section className="silder-item">
-        <div className="header">
+        <div className="header drag-handle">
           {nowDate}
           <button
             className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}
@@ -33,7 +33,7 @@ export default class Calendar extends Component {
         </div>
 
         <div className={`content ${detailVisible ? "h-60 p-3" : "h-0 p-0"}`}>
-          <div>123123</div>
+          <div></div>
         </div>
       </section>
     );

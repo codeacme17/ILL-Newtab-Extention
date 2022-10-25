@@ -1,0 +1,11 @@
+.silder:has(.react-draggable-dragging) {
+  background-color: rgba(153, 153, 153, 0.082);
+  backdrop-filter: blur(6px);
+}
+
+.dark {
+  .silder:has(.react-draggable-dragging) {
+    background-color: rgba(107, 107, 107, 0.082);
+    backdrop-filter: blur(6px);
+  }
+}
