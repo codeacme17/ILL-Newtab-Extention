@@ -6,6 +6,10 @@ import BaiduIcon from "../../icons/baidu";
 import "./index.scss";
 
 export default class Search extends Component {
+  state = {
+    searchEngine: this.BING_URL,
+  };
+
   // Use Bing To Search
   InputRef = createRef();
   BING_URL = "https://www.bing.com/search?q=";
@@ -18,9 +22,7 @@ export default class Search extends Component {
     }
   };
 
-  state = {
-    searchEngine: this.BING_URL,
-  };
+  // Switch Search Engine
   switchSearchEngine = (type) => {
     switch (type) {
       case "bing":

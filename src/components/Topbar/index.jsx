@@ -4,14 +4,10 @@ import MoonIcon from "../../icons/moon";
 import SideListIcon from "../../icons/sidelist";
 
 export default class Topbar extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      sidebarVisible: false,
-      darkMode: true,
-    };
-  }
+  state = {
+    sidebarVisible: false,
+    darkMode: Boolean,
+  };
 
   // Show Sidebar switch button hanlder
   switchSiderbarVisible = () => {
@@ -20,14 +16,19 @@ export default class Topbar extends Component {
   };
 
   // Get dark mode state from localstorage
+  localData = JSON.parse(localStorage.getItem("_setting_data"));
   componentDidMount = () => {
-    const localDarkMode = localStorage.getItem("dark");
-    if (localDarkMode && localDarkMode === "false") {
-      document.documentElement.classList.remove("dark");
-      this.setState({ darkMode: false });
-    } else if (localDarkMode && localDarkMode === "true") {
-      document.documentElement.classList.add("dark");
-      this.setState({ darkMode: true });
+    if (typeof this.localData.darkMode !== Boolean) {
+      this.localData.darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+    } else {
+      if (this.localData.darkMode) {
+        document.documentElement.classList.add("dark");
+        this.setState({ darkMode: true });
+      } else {
+        document.documentElement.classList.remove("dark");
+        this.setState({ darkMode: false });
+      }
     }
   };
 
@@ -35,13 +36,14 @@ export default class Topbar extends Component {
   switchDarkMode = () => {
     if (this.state.darkMode) {
       document.documentElement.classList.remove("dark");
+      this.localData.darkMode = false;
       this.setState({ darkMode: false });
-      localStorage.setItem("dark", "false");
     } else {
       document.documentElement.classList.add("dark");
+      this.localData.darkMode = true;
       this.setState({ darkMode: true });
-      localStorage.setItem("dark", "true");
     }
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
   };
 
   render = () => {

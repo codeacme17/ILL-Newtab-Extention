@@ -4,6 +4,12 @@ import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 
 export default class App extends Component {
+  // Init localStorage data
+  componentDidMount = () => {
+    const localSettingData = localStorage.getItem("_setting_data");
+    if (!localSettingData) localStorage.setItem("_setting_data", JSON.stringify({}));
+  };
+
   render() {
     return (
       <div className="App">
