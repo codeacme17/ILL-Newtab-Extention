@@ -18,7 +18,7 @@ export default class Topbar extends Component {
   // Get dark mode state from localstorage
   localData = JSON.parse(localStorage.getItem("_setting_data"));
   componentDidMount = () => {
-    if (typeof this.localData.darkMode !== Boolean) {
+    if (typeof this.localData.darkMode !== "boolean") {
       this.localData.darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
       localStorage.setItem("_setting_data", JSON.stringify(this.localData));
     } else {
