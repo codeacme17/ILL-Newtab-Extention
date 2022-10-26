@@ -3,13 +3,14 @@ import SearchIcon from "../../icons/search";
 import BingIcon from "../../icons/bing";
 import GoogleIcon from "../../icons/google";
 import BaiduIcon from "../../icons/baidu";
+import "./index.scss";
 
 export default class Search extends Component {
   // Use Bing To Search
+  InputRef = createRef();
   BING_URL = "https://www.bing.com/search?q=";
   GOOGLE_URL = "https://www.google.com/search?q=";
   BAIDU_URL = "https://www.baidu.com/s?wd=";
-  InputRef = createRef();
   search = (e) => {
     let inputValue = this.InputRef.current.value;
     if (e.keyCode === 13 && inputValue.trim()) {
@@ -50,20 +51,20 @@ export default class Search extends Component {
         </div>
 
         {/* INPUT */}
-        <label className="relative block overflow-hidden mt-10">
-          <span className="absolute top-2 left-3.5">
+        <label className="input_label relative mt-10">
+          <span className="absolute top-3.5 left-3.5">
             <SearchIcon />
           </span>
 
           <input
             type="text"
-            className="w-[560px] h-10 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 text-md dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
+            className="input_bar w-[560px] h-10 py-6 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 text-md dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
             placeholder="Search You Want"
             ref={this.InputRef}
             onKeyUp={this.search}
           />
 
-          <div className="absolute top-2 right-5 flex items-center ease-in-out duration-300">
+          <div className="engine_btns absolute top-3 right-3 flex items-center ease-in-out duration-300 transition-[fill,opacity]">
             <button
               className={`mr-2 ${
                 searchEngine === this.BING_URL
