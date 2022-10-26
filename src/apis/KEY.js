@@ -1,0 +1,3 @@
+const QWEATER_KEY = "ae5c01db332f40218192fcb0580b180c";
+
+export { QWEATER_KEY };

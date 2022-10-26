@@ -52,23 +52,23 @@ export default class Search extends Component {
 
         {/* INPUT */}
         <label className="input_label relative mt-10">
-          <span className="absolute top-3.5 left-3.5">
+          <span className="absolute top-2 left-3.5">
             <SearchIcon />
           </span>
 
           <input
             type="text"
-            className="input_bar w-[560px] h-10 py-6 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 text-md dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
-            placeholder="Search You Want"
+            className="input_bar w-[560px] h-10 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
+            placeholder="SEARCH YOU WANT"
             ref={this.InputRef}
             onKeyUp={this.search}
           />
 
-          <div className="engine_btns absolute top-3 right-3 flex items-center ease-in-out duration-300 transition-[fill,opacity]">
+          <div className="engine_btns absolute top-2 right-3 flex items-center ease-in-out duration-300 transition-[fill,opacity]">
             <button
               className={`mr-2 ${
                 searchEngine === this.BING_URL
-                  ? "fill-sky-300 dark:fill-sky-700"
+                  ? "fill-sky-500 dark:fill-sky-700"
                   : "dark:fill-main-400"
               }`}
               onClick={() => this.switchSearchEngine("bing")}
@@ -78,7 +78,7 @@ export default class Search extends Component {
             <button
               className={`mr-2 ${
                 searchEngine === this.GOOGLE_URL
-                  ? "fill-sky-300 dark:fill-sky-700"
+                  ? "fill-sky-500 dark:fill-sky-700"
                   : "dark:fill-main-400"
               }`}
               onClick={() => this.switchSearchEngine("google")}
@@ -88,7 +88,7 @@ export default class Search extends Component {
             <button
               className={`mr-2 ${
                 searchEngine === this.BAIDU_URL
-                  ? "fill-sky-300 dark:fill-sky-700"
+                  ? "fill-sky-500 dark:fill-sky-700"
                   : "dark:fill-main-400"
               }`}
               onClick={() => this.switchSearchEngine("baidu")}

@@ -74,7 +74,7 @@ export default class Todo extends Component {
                     className="flex justify-between cursor-pointer py-2 px-3 border-main-400"
                     key={item.id}
                   >
-                    <div className="font-bold">{item.title}</div>
+                    <div className="font-semibold text-sm">{item.title}</div>
                     {detailVisible ? (
                       <input
                         type="checkbox"

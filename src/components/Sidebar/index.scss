@@ -6,7 +6,6 @@
     transition: background-color 0.2s ease-in-out;
     @apply w-[370px] pr-1 p-2 mt-16 fixed right-0 top-0 overflow-y-scroll flex flex-col items-center rounded-lg z-10 pointer-events-none;
 
-    // Layout of per item in sidebar
     .silder-item {
       @apply w-full border-[1px] shadow-lg border-main-300 bg-main-200  dark:border-main-700 dark:bg-neutral-900 rounded-lg pointer-events-auto;
 
@@ -20,6 +19,7 @@
         @apply bg-main-100 dark:text-main-200 dark:bg-main-800 ease-in-out duration-300 transition-all overflow-hidden rounded-b-md;
       }
     }
+
     .react-draggable {
       @apply w-full duration-200 transition-[box-shadow,width] my-2 rounded-lg;
     }
@@ -29,12 +29,14 @@
       @apply w-[97%];
     }
   }
+
   .silder::-webkit-scrollbar {
     @apply bg-none w-1;
   }
   .silder::-webkit-scrollbar-thumb {
     @apply bg-main-400 dark:bg-main-600 rounded-xl;
   }
+
   .silder:has(.react-draggable-dragging) {
     background-color: rgba(153, 153, 153, 0.082);
     backdrop-filter: blur(3px);
