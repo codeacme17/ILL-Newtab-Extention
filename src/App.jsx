@@ -11,6 +11,7 @@ export default class App extends Component {
         <Searchbar />
         <Sidebar />
 
+        {/* Footer Sign */}
         <div className="absolute right-2 bottom-2 italic text-sm text-main-600 dark:text-main-400">
           made by
           <a
