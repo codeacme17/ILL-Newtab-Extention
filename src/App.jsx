@@ -20,6 +20,7 @@ export default class App extends Component {
           },
           todo: {
             open: false,
+            list: [],
           },
           calendar: {
             open: false,

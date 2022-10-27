@@ -12,7 +12,6 @@ export default class Weather extends Component {
     // "2" - request error
     // "3" - browser not allow user access current position
     requestState: "0",
-    requestErrorMessage: "",
     weatherData: {},
   };
 
@@ -22,15 +21,17 @@ export default class Weather extends Component {
     this.setState({ detailVisible: localData.weather.open });
 
     // Request QWeather's API to get the weather data
+
     // const location = await this.getLocation();
     // const res = await GetWeather({
     //   location,
     // });
     // if (res.data.code !== "200") {
-    //   this.setState({ requestState: "2", requestErrorMessage: res.data.message });
+    //   this.setState({ requestState: "2" });
     //   return;
     // }
     // this.setState({ requestState: "1" });
+
     const res = {
       data: {
         now: {
@@ -82,23 +83,22 @@ export default class Weather extends Component {
     if (this.state.detailVisible) {
       this.setState({ detailVisible: false });
       localData.weather.open = false;
-      localStorage.setItem("_setting_data", JSON.stringify(localData));
     } else {
       this.setState({ detailVisible: true });
       localData.weather.open = true;
-      localStorage.setItem("_setting_data", JSON.stringify(localData));
     }
+    localStorage.setItem("_setting_data", JSON.stringify(localData));
   };
 
   render() {
-    const { detailVisible, requestState, requestErrorMessage, weatherData } = this.state;
+    const { detailVisible, requestState, weatherData } = this.state;
 
     return (
       <section className="silder-item">
         {/* Header */}
         <div className="header drag-handle">
           {requestState === "0" ? (
-            <div className="animate-pulse py-1">GETTING WEATHER DATA</div>
+            <div className="animate-pulse py-1">GETTING WEATHER DATA ...</div>
           ) : (
             ""
           )}
@@ -113,21 +113,10 @@ export default class Weather extends Component {
             ""
           )}
 
-          {requestState === "2" ? (
-            <div className="py-1 pl-1 text-rose-600 dark:text-rose-500 font-normal italic">
-              Request Error !
-            </div>
-          ) : (
-            ""
-          )}
-
-          {requestState === "3" ? (
-            <div className="py-1 pl-1 text-rose-600 dark:text-rose-500 font-normal italic">
-              Please allow page for positioning !
-            </div>
-          ) : (
-            ""
-          )}
+          <div className="py-1 pl-1 text-rose-600 dark:text-rose-500 font-normal italic">
+            {requestState === "2" ? "Request Error !" : ""}
+            {requestState === "3" ? "Please allow page for positioning !" : ""}
+          </div>
 
           <button
             className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}

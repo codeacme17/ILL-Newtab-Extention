@@ -1,0 +1,11 @@
+.todo_item {
+  .cancel_btn {
+    opacity: 0;
+    transition: 0.2s 0.1s ease-in-out;
+  }
+  &:hover {
+    .cancel_btn {
+      opacity: 1;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import ArrowupIcon from "../../../icons/arrowup";
+import DeleteIcon from "../../../icons/delete";
+import "./index.scss";
 
 export default class Todo extends Component {
   state = {
@@ -8,41 +10,88 @@ export default class Todo extends Component {
     todoList: [],
   };
 
+  localData = {};
+  getLocalData = () => {
+    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
+  };
+  setLocalData = () => {
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
   componentDidMount = () => {
-    // If there is none todo item in list,
-    // Show the input bar to user
-    if (!this.state.todoList.length) this.setState({ detailVisible: true });
+    this.getLocalData();
+    this.setState({ detailVisible: this.localData.todo.open, todoList: this.localData.todo.list });
   };
 
   // Switch detail content visible handler
   switchDetailVisible = () => {
-    if (this.state.detailVisible) this.setState({ detailVisible: false });
-    else this.setState({ detailVisible: true });
-  };
-
-  // Modify state of single todo item
-  modifyTodoState = (id) => {
-    const newList = this.state.todoList.map((item) => {
-      if (item.id === id) {
-        if (item.state) return { ...item, state: false };
-        else return { ...item, state: true };
-      } else return item;
-    });
-    this.setState({ todoList: newList });
+    this.getLocalData();
+    if (this.state.detailVisible) {
+      this.setState({ detailVisible: false });
+      this.localData.todo.open = false;
+    } else {
+      this.setState({ detailVisible: true });
+      this.localData.todo.open = true;
+    }
+    this.setLocalData();
   };
 
   // Add todo task
   addTodo = (e) => {
     if (e.keyCode !== 13) return;
     if (!e.target.value.trim()) return;
-    const newTodoItem = {
-      id: nanoid(),
-      title: e.target.value,
-      state: false,
-    };
+    let isSameTodo = this.state.todoList.every((item) => {
+      return item.content !== e.target.value;
+    });
+    if (!isSameTodo) return;
+
+    this.getLocalData();
+
+    const newTodoItem = { id: nanoid(), content: "", level: "" };
+    const resValue = this.getTodoLevel(e.target.value);
+
+    if (!resValue.value.trim()) return;
+    newTodoItem.content = resValue.value;
+    newTodoItem.level = resValue.level;
+
     this.state.todoList.push(newTodoItem);
     e.target.value = "";
+
     this.setState({ todoList: this.state.todoList });
+    this.localData.todo.list = this.state.todoList;
+    this.setLocalData();
+  };
+
+  // Get the level from user input
+  getTodoLevel = (value) => {
+    const levels = ["1", "2", "3"];
+    let array = value.split("#");
+    let level = array[array.length - 1];
+    if (levels.indexOf(level.trim()) !== -1) {
+      if (array.length === 2)
+        return {
+          value: array[0],
+          level: level.trim(),
+        };
+      if (array.length > 2)
+        return {
+          value: array.slice(0, array.length - 1).join("#"),
+          level: level.trim(),
+        };
+    }
+    return {
+      value,
+      level: "1",
+    };
+  };
+
+  // Cancel todo task
+  cancelTodo = (index) => {
+    this.getLocalData();
+    this.state.todoList.splice(index, 1);
+    this.setState({ todoList: this.state.todoList });
+    this.localData.todo.list = this.state.todoList;
+    this.setLocalData();
   };
 
   render() {
@@ -64,44 +113,54 @@ export default class Todo extends Component {
         <div className="content">
           <div className="p-3 pb-3 divide-y divide-dashed">
             {!todoList.length ? (
-              <div className="mb-2 text-sm italic text-main-600 dark:text-main-400">
-                You can add some todos in here
+              <div className="text-main-600 dark:text-main-400">
+                <p className="mb-1 text-sm">You can add some todos in here</p>
+                <span className="text-xs italic">
+                  📎 you can add # with number 1-3 in the end , to set level of the signal todo item
+                  (default " 1 ")
+                </span>
               </div>
             ) : (
-              todoList.map((item) => {
+              todoList.map((item, index) => {
                 return (
-                  <label
-                    className="flex justify-between cursor-pointer py-2 px-3 border-main-400"
+                  /* Sigle tode item */
+                  <div
+                    className="todo_item flex justify-between py-2.5 pr-3 pl-1 border-main-400"
                     key={item.id}
                   >
-                    <div className="font-semibold text-sm">{item.title}</div>
-                    {detailVisible ? (
-                      <input
-                        type="checkbox"
-                        checked={item.state}
-                        name="todoCheck"
-                        id=""
-                        onChange={() => this.modifyTodoState(item.id)}
-                        className="w-3.5 cursor-pointer"
+                    <div className="font-semibold text-sm flex items-center">
+                      <div
+                        className={`w-1.5 h-[60%] rounded-xl mr-2 
+                        ${item.level === "1" ? "bg-gray-400 dark:bg-gray-600" : ""} 
+                        ${item.level === "2" ? "bg-sky-400 dark:bg-sky-600" : ""}
+                        ${item.level === "3" ? "bg-rose-400 dark:bg-rose-600" : ""}
+                        `}
                       />
+                      <div className="flex-1">{item.content}</div>
+                    </div>
+                    {detailVisible ? (
+                      <button className="cancel_btn" onClick={() => this.cancelTodo(index)}>
+                        <DeleteIcon />
+                      </button>
                     ) : (
                       ""
                     )}
-                  </label>
+                  </div>
                 );
               })
             )}
           </div>
 
-          {/* Input to add todo */}
+          {/* Input text to add todo */}
           <div
-            className={`ease-in-out duration-300 ${detailVisible ? "p-3 -mt-5 h-16" : "h-0 p-0"}`}
+            className={`ease-in-out duration-300 ${detailVisible ? "p-3 -mt-3 h-16" : "h-0 p-0"}`}
           >
             <input
               type="text"
-              className="shadow-inner outline-none border-[1px] rounded-md px-3 py-1.5 text-sm dark:bg-main-600 dark:border-main-500 w-full"
+              className="shadow-inner outline-none border-[1px] rounded-md px-3 py-1.5 text-sm dark:bg-main-600 dark:border-main-500 w-full placeholder:italic"
               onKeyUp={(e) => this.addTodo(e)}
-              disabled={todoList.length > 4}
+              disabled={todoList.length >= 5}
+              placeholder={"e.g : todo #1"}
             />
           </div>
         </div>
