@@ -16,34 +16,30 @@ export default class Topbar extends Component {
   };
 
   // Get dark mode state from localstorage
-  localData = JSON.parse(localStorage.getItem("_setting_data"));
   componentDidMount = () => {
-    if (typeof this.localData.darkMode !== "boolean") {
-      this.localData.darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+    const localData = JSON.parse(localStorage.getItem("_setting_data"));
+    if (localData.darkMode) {
+      document.documentElement.classList.add("dark");
+      this.setState({ darkMode: true });
     } else {
-      if (this.localData.darkMode) {
-        document.documentElement.classList.add("dark");
-        this.setState({ darkMode: true });
-      } else {
-        document.documentElement.classList.remove("dark");
-        this.setState({ darkMode: false });
-      }
+      document.documentElement.classList.remove("dark");
+      this.setState({ darkMode: false });
     }
   };
 
   // Dark Mode switch button hanlder
   switchDarkMode = () => {
+    const localData = JSON.parse(localStorage.getItem("_setting_data"));
     if (this.state.darkMode) {
       document.documentElement.classList.remove("dark");
-      this.localData.darkMode = false;
+      localData.darkMode = false;
       this.setState({ darkMode: false });
     } else {
       document.documentElement.classList.add("dark");
-      this.localData.darkMode = true;
+      localData.darkMode = true;
       this.setState({ darkMode: true });
     }
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+    localStorage.setItem("_setting_data", JSON.stringify(localData));
   };
 
   render = () => {

@@ -5,23 +5,21 @@ import GoogleIcon from "../../icons/google";
 import BaiduIcon from "../../icons/baidu";
 
 export default class Search extends Component {
+  BING_URL = "https://www.bing.com/search?q=";
+  GOOGLE_URL = "https://www.google.com/search?q=";
+  BAIDU_URL = "https://www.baidu.com/s?wd=";
+
   state = {
     searchEngine: this.BING_URL,
   };
 
-  // Use Bing To Search
-  InputRef = createRef();
-  BING_URL = "https://www.bing.com/search?q=";
-  GOOGLE_URL = "https://www.google.com/search?q=";
-  BAIDU_URL = "https://www.baidu.com/s?wd=";
-  search = (e) => {
-    let inputValue = this.InputRef.current.value;
-    if (e.keyCode === 13 && inputValue.trim()) {
-      window.location = this.state.searchEngine + inputValue;
-    }
+  // Mount search engine
+  componentDidMount = () => {
+    const localData = JSON.parse(localStorage.getItem("_setting_data"));
+    this.switchSearchEngine(localData.searchEngine);
   };
 
-  // Switch Search Engine
+  // Switch search engine
   switchSearchEngine = (type) => {
     switch (type) {
       case "bing":
@@ -39,6 +37,19 @@ export default class Search extends Component {
       default:
         break;
     }
+    // Modify search engine type of localstorage
+    const localData = JSON.parse(localStorage.getItem("_setting_data"));
+    localData.searchEngine = type;
+    localStorage.setItem("_setting_data", JSON.stringify(localData));
+  };
+
+  // Search Event
+  InputRef = createRef();
+  search = (e) => {
+    let inputValue = this.InputRef.current.value;
+    if (e.keyCode === 13 && inputValue.trim()) {
+      window.location = this.state.searchEngine + inputValue;
+    }
   };
 
   render() {
@@ -54,7 +65,7 @@ export default class Search extends Component {
 
           <input
             type="text"
-            className="w-[660px] h-12 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
+            className="w-[620px] h-12 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
             placeholder="SEARCH YOU WANT"
             ref={this.InputRef}
             onKeyUp={this.search}

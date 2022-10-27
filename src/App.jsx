@@ -4,11 +4,20 @@ import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 
 export default class App extends Component {
-  // Init localStorage data
-  componentDidMount = () => {
+  constructor() {
+    super();
+
+    // Init localStorage data
     const localSettingData = localStorage.getItem("_setting_data");
-    if (!localSettingData) localStorage.setItem("_setting_data", JSON.stringify({}));
-  };
+    if (!localSettingData)
+      localStorage.setItem(
+        "_setting_data",
+        JSON.stringify({
+          darkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
+          searchEngine: "bing",
+        })
+      );
+  }
 
   render() {
     return (
