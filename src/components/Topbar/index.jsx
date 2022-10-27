@@ -18,28 +18,22 @@ export default class Topbar extends Component {
   // Get dark mode state from localstorage
   componentDidMount = () => {
     const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    if (localData.darkMode) {
-      document.documentElement.classList.add("dark");
-      this.setState({ darkMode: true });
-    } else {
-      document.documentElement.classList.remove("dark");
-      this.setState({ darkMode: false });
-    }
+    this.setState({ darkMode: localData.darkMode });
+    this.switchDarkClass(localData.darkMode);
   };
 
   // Dark Mode switch button hanlder
   switchDarkMode = () => {
     const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    if (this.state.darkMode) {
-      document.documentElement.classList.remove("dark");
-      localData.darkMode = false;
-      this.setState({ darkMode: false });
-    } else {
-      document.documentElement.classList.add("dark");
-      localData.darkMode = true;
-      this.setState({ darkMode: true });
-    }
+    localData.darkMode = !localData.darkMode;
+    this.setState({ darkMode: localData.darkMode });
+    this.switchDarkClass(localData.darkMode);
     localStorage.setItem("_setting_data", JSON.stringify(localData));
+  };
+
+  switchDarkClass = (flag) => {
+    if (flag) document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
   };
 
   render = () => {

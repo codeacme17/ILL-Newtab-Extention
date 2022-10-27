@@ -15,6 +15,15 @@ export default class App extends Component {
         JSON.stringify({
           darkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
           searchEngine: "bing",
+          weather: {
+            open: false,
+          },
+          todo: {
+            open: false,
+          },
+          calendar: {
+            open: false,
+          },
         })
       );
   }

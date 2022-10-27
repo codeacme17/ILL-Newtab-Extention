@@ -25,15 +25,12 @@ export default class Search extends Component {
       case "bing":
         this.setState({ searchEngine: this.BING_URL });
         break;
-
       case "google":
         this.setState({ searchEngine: this.GOOGLE_URL });
         break;
-
       case "baidu":
         this.setState({ searchEngine: this.BAIDU_URL });
         break;
-
       default:
         break;
     }
