@@ -12,6 +12,7 @@ module.exports = {
       gray: colors.gray,
       neutral: colors.neutral,
       sky: colors.sky,
+      rose: colors.rose,
     },
   },
 };

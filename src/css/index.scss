@@ -3,9 +3,9 @@
 html {
   transition: background-color 0.3s ease-in-out;
   background-color: #f7f7f7;
-}
-html.dark {
-  background-color: #27272a;
+  &.dark {
+    background-color: #1e1e1e;
+  }
 }
 
 body {
@@ -14,7 +14,12 @@ body {
 
 button {
   transition: opacity 0.2s ease-in-out;
-  :hover {
+  &:hover {
     opacity: 0.8;
   }
+}
+
+:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
 }
