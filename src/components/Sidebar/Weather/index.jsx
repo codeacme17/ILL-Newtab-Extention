@@ -8,9 +8,11 @@ export default class Weather extends Component {
     detailVisible: false,
     // requestState: The state of request QWeather's API;
     // "0" - loading (default)
-    // "1" - success
-    // "2" - browser not allow user access current position
+    // "1" - request success
+    // "2" - request error
+    // "3" - browser not allow user access current position
     requestState: "0",
+    requestErrorMessage: "",
     weatherData: {},
   };
 
@@ -20,33 +22,36 @@ export default class Weather extends Component {
     this.setState({ detailVisible: localData.weather.open });
 
     // Request QWeather's API to get the weather data
-    const location = await this.getLocation();
-    const res = await GetWeather({
-      location,
-    });
-    if (res.data.code !== "200") return;
-    this.setState({ requestState: "1" });
-    // const res = {
-    //   data: {
-    //     now: {
-    //       obsTime: "2022-10-26T12:26+08:00",
-    //       temp: "17",
-    //       feelsLike: "14",
-    //       icon: "101",
-    //       text: "Cloudy",
-    //       wind360: "135",
-    //       windDir: "SE",
-    //       windScale: "4",
-    //       windSpeed: "20",
-    //       humidity: "60",
-    //       precip: "0.0",
-    //       pressure: "1019",
-    //       vis: "30",
-    //       cloud: "100",
-    //       dew: "10",
-    //     },
-    //   },
-    // };
+    // const location = await this.getLocation();
+    // const res = await GetWeather({
+    //   location,
+    // });
+    // if (res.data.code !== "200") {
+    //   this.setState({ requestState: "2", requestErrorMessage: res.data.message });
+    //   return;
+    // }
+    // this.setState({ requestState: "1" });
+    const res = {
+      data: {
+        now: {
+          obsTime: "2022-10-26T12:26+08:00",
+          temp: "17",
+          feelsLike: "14",
+          icon: "101",
+          text: "Cloudy",
+          wind360: "135",
+          windDir: "SE",
+          windScale: "4",
+          windSpeed: "20",
+          humidity: "60",
+          precip: "0.0",
+          pressure: "1019",
+          vis: "30",
+          cloud: "100",
+          dew: "10",
+        },
+      },
+    };
     this.setState({ weatherData: res.data.now });
   };
 
@@ -65,7 +70,7 @@ export default class Weather extends Component {
         resolve(position);
       }
       function error(err) {
-        that.setState({ requestState: "2" });
+        that.setState({ requestState: "3" });
       }
       navigator.geolocation.getCurrentPosition(success, error, options);
     });
@@ -86,7 +91,7 @@ export default class Weather extends Component {
   };
 
   render() {
-    const { detailVisible, requestState, weatherData } = this.state;
+    const { detailVisible, requestState, requestErrorMessage, weatherData } = this.state;
 
     return (
       <section className="silder-item">
@@ -110,6 +115,14 @@ export default class Weather extends Component {
 
           {requestState === "2" ? (
             <div className="py-1 pl-1 text-rose-600 dark:text-rose-500 font-normal italic">
+              Request Error !
+            </div>
+          ) : (
+            ""
+          )}
+
+          {requestState === "3" ? (
+            <div className="py-1 pl-1 text-rose-600 dark:text-rose-500 font-normal italic">
               Please allow page for positioning !
             </div>
           ) : (
@@ -119,7 +132,7 @@ export default class Weather extends Component {
           <button
             className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}
             onClick={this.switchDetailVisible}
-            disabled={requestState === "2"}
+            disabled={requestState === "2" || requestState === "3"}
           >
             <ArrowupIcon />
           </button>
@@ -128,9 +141,19 @@ export default class Weather extends Component {
         {/* Content */}
         <div
           className={`content text-sm ${
-            detailVisible && requestState !== "2" ? "h-32 p-3 opacity-100" : "h-0 p-0 opacity-0"
+            detailVisible && requestState !== "2" && requestState !== "3"
+              ? "h-32 p-3 opacity-100"
+              : "h-0 p-0 opacity-0"
           }`}
         >
+          {requestState === "0" ? (
+            <div className="flex h-full justify-center items-center">
+              <LoadingIcon />
+            </div>
+          ) : (
+            ""
+          )}
+
           {requestState === "1" ? (
             <div>
               {" "}
@@ -149,9 +172,7 @@ export default class Weather extends Component {
               </div>
             </div>
           ) : (
-            <div className="flex h-full justify-center items-center">
-              <LoadingIcon />
-            </div>
+            ""
           )}
         </div>
       </section>
