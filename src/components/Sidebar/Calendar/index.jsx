@@ -3,6 +3,16 @@ import ReactCalendar from "react-calendar";
 import ArrowupIcon from "../../../icons/arrowup";
 import "./index.scss";
 
+let localData;
+
+function getLocalData() {
+  localData = JSON.parse(localStorage.getItem("_setting_data"));
+}
+
+function setLocalData() {
+  localStorage.setItem("_setting_data", JSON.stringify(localData));
+}
+
 // Get the currrent date to mounte in header
 function getHeaderDate() {
   const d = new Date();
@@ -13,9 +23,8 @@ export default function Calendar() {
   const [date, setDate] = useState(new Date());
   const [detailVisible, setDetailVisible] = useState(Boolean);
 
-  let localData;
   useEffect(() => {
-    localData = JSON.parse(localStorage.getItem("_setting_data"));
+    getLocalData();
     setDetailVisible(localData.calendar.open);
   });
 
@@ -24,7 +33,7 @@ export default function Calendar() {
     if (detailVisible) setDetailVisible(false);
     else setDetailVisible(true);
     localData.calendar.open = !detailVisible;
-    localStorage.setItem("_setting_data", JSON.stringify(localData));
+    setLocalData();
   };
 
   return (

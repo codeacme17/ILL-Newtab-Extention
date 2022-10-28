@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+
 import SunIcon from "../../icons/sun";
 import MoonIcon from "../../icons/moon";
 import SideListIcon from "../../icons/sidelist";
 
 export default class Topbar extends Component {
+  getLocalData = () => {
+    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
+  };
+
+  setLocalData = () => {
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
   state = {
     sidebarVisible: false,
     darkMode: Boolean,
@@ -11,9 +20,12 @@ export default class Topbar extends Component {
 
   // Get dark mode state from localstorage
   componentDidMount = () => {
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    this.setState({ darkMode: localData.darkMode, sidebarVisible: localData.sidebar.open });
-    this.switchDarkClass(localData.darkMode);
+    this.getLocalData();
+    this.setState({
+      darkMode: this.localData.darkMode,
+      sidebarVisible: this.localData.sidebar.open,
+    });
+    this.switchDarkClass(this.localData.darkMode);
   };
 
   // Show Sidebar switch button hanlder
@@ -25,11 +37,11 @@ export default class Topbar extends Component {
 
   // Dark Mode switch button hanlder
   switchDarkMode = () => {
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    localData.darkMode = !localData.darkMode;
-    this.setState({ darkMode: localData.darkMode });
-    this.switchDarkClass(localData.darkMode);
-    localStorage.setItem("_setting_data", JSON.stringify(localData));
+    this.getLocalData();
+    this.localData.darkMode = !this.localData.darkMode;
+    this.setState({ darkMode: this.localData.darkMode });
+    this.switchDarkClass(this.localData.darkMode);
+    this.setLocalData();
   };
 
   switchDarkClass = (flag) => {

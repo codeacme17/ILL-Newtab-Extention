@@ -1,34 +1,33 @@
 import React, { Component } from "react";
+
 import Searchbar from "./components/Searchbar";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 
 export default class App extends Component {
+  getLocalData = () => {
+    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
+  };
+
+  setLocalData = () => {
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
   constructor() {
     super();
     // Init local storage data
-    const localData = localStorage.getItem("_setting_data");
-    if (!localData)
-      localStorage.setItem(
-        "_setting_data",
-        JSON.stringify({
-          darkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
-          searchEngine: "bing",
-          sidebar: {
-            open: false,
-          },
-          weather: {
-            open: true,
-          },
-          todo: {
-            open: true,
-            list: [],
-          },
-          calendar: {
-            open: true,
-          },
-        })
-      );
+    this.getLocalData();
+    if (!this.localData) {
+      this.localData = {
+        darkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
+        searchEngine: "bing",
+        sidebar: { open: false },
+        weather: { open: true },
+        todo: { open: true, list: [] },
+        calendar: { open: true },
+      };
+      this.setLocalData();
+    }
   }
 
   state = {
@@ -36,14 +35,14 @@ export default class App extends Component {
   };
 
   componentDidMount = () => {
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    this.setState({ sidebarVisible: localData.sidebar.open });
+    this.getLocalData();
+    this.setState({ sidebarVisible: this.localData.sidebar.open });
   };
 
   switchSiderbarVisible = (sidebarVisible) => {
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    localData.sidebar.open = sidebarVisible;
-    localStorage.setItem("_setting_data", JSON.stringify(localData));
+    this.getLocalData();
+    this.localData.sidebar.open = sidebarVisible;
+    this.setLocalData();
     this.setState({ sidebarVisible });
   };
 

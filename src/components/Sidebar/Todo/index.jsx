@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
+
 import ArrowupIcon from "../../../icons/arrowup";
 import DeleteIcon from "../../../icons/delete";
 import "./index.scss";
 
 export default class Todo extends Component {
-  state = {
-    detailVisible: false,
-    todoList: [],
-  };
-
-  localData = {};
   getLocalData = () => {
     this.localData = JSON.parse(localStorage.getItem("_setting_data"));
   };
+
   setLocalData = () => {
     localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
+  state = {
+    detailVisible: false,
+    todoList: [],
   };
 
   componentDidMount = () => {

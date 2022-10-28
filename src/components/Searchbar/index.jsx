@@ -1,10 +1,19 @@
 import React, { Component, createRef } from "react";
+
 import SearchIcon from "../../icons/search";
 import BingIcon from "../../icons/bing";
 import GoogleIcon from "../../icons/google";
 import BaiduIcon from "../../icons/baidu";
 
 export default class Search extends Component {
+  getLocalData = () => {
+    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
+  };
+
+  setLocalData = () => {
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
   BING_URL = "https://www.bing.com/search?q=";
   GOOGLE_URL = "https://www.google.com/search?q=";
   BAIDU_URL = "https://www.baidu.com/s?wd=";
@@ -15,8 +24,8 @@ export default class Search extends Component {
 
   // Mount search engine
   componentDidMount = () => {
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    this.switchSearchEngine(localData.searchEngine);
+    this.getLocalData();
+    this.switchSearchEngine(this.localData.searchEngine);
   };
 
   // Switch search engine
@@ -35,9 +44,9 @@ export default class Search extends Component {
         break;
     }
     // Modify search engine type of localstorage
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    localData.searchEngine = type;
-    localStorage.setItem("_setting_data", JSON.stringify(localData));
+    this.getLocalData();
+    this.localData.searchEngine = type;
+    this.setLocalData();
   };
 
   // Search Event

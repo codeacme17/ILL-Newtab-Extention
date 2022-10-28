@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+
 import ArrowupIcon from "../../../icons/arrowup";
 import LoadingIcon from "../../../icons/loading";
 import { GetWeather } from "../../../apis";
 
 export default class Weather extends Component {
+  getLocalData = () => {
+    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
+  };
+
+  setLocalData = () => {
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
   state = {
     detailVisible: false,
     // requestState: The state of request QWeather's API;
@@ -17,39 +26,38 @@ export default class Weather extends Component {
 
   componentDidMount = async () => {
     // Get state of weather item from local storage
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    this.setState({ detailVisible: localData.weather.open });
+    this.getLocalData();
+    this.setState({ detailVisible: this.localData.weather.open });
 
     // Request QWeather's API to get the weather data
+    const location = await this.getLocation();
+    const res = await GetWeather({
+      location,
+    });
+    if (res.data.code !== "200") {
+      this.setState({ requestState: "2" });
+      return;
+    }
+    this.setState({ requestState: "1" });
 
-    // const location = await this.getLocation();
-    // const res = await GetWeather({
-    //   location,
-    // });
-    // if (res.data.code !== "200") {
-    //   this.setState({ requestState: "2" });
-    //   return;
-    // }
-    // this.setState({ requestState: "1" });
-
-    const res = {
-      data: {
-        now: {
-          temp: "17",
-          feelsLike: "14",
-          icon: "101",
-          text: "Cloudy",
-          windDir: "SE",
-          windScale: "4",
-          windSpeed: "20",
-          precip: "0.0",
-          pressure: "1019",
-          vis: "30",
-          cloud: "100",
-          dew: "10",
-        },
-      },
-    };
+    // const res = {
+    //   data: {
+    //     now: {
+    //       temp: "17",
+    //       feelsLike: "14",
+    //       icon: "101",
+    //       text: "Cloudy",
+    //       windDir: "SE",
+    //       windScale: "4",
+    //       windSpeed: "20",
+    //       precip: "0.0",
+    //       pressure: "1019",
+    //       vis: "30",
+    //       cloud: "100",
+    //       dew: "10",
+    //     },
+    //   },
+    // };
     this.setState({ weatherData: res.data.now });
   };
 
@@ -76,15 +84,15 @@ export default class Weather extends Component {
 
   // Switch detail content visible handler
   switchDetailVisible = () => {
-    const localData = JSON.parse(localStorage.getItem("_setting_data"));
+    this.getLocalData();
     if (this.state.detailVisible) {
       this.setState({ detailVisible: false });
-      localData.weather.open = false;
+      this.localData.weather.open = false;
     } else {
       this.setState({ detailVisible: true });
-      localData.weather.open = true;
+      this.localData.weather.open = true;
     }
-    localStorage.setItem("_setting_data", JSON.stringify(localData));
+    this.setLocalData();
   };
 
   render() {
