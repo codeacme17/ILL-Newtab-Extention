@@ -16,6 +16,7 @@ export default class Topbar extends Component {
   state = {
     sidebarVisible: false,
     darkMode: Boolean,
+    hasTodo: Boolean,
   };
 
   // Get dark mode state from localstorage
@@ -24,6 +25,7 @@ export default class Topbar extends Component {
     this.setState({
       darkMode: this.localData.darkMode,
       sidebarVisible: this.localData.sidebar.open,
+      hasTodo: !!this.localData.todo.list.length,
     });
     this.switchDarkClass(this.localData.darkMode);
   };
@@ -50,12 +52,23 @@ export default class Topbar extends Component {
   };
 
   render = () => {
-    const { sidebarVisible, darkMode } = this.state;
+    const { sidebarVisible, darkMode, hasTodo } = this.state;
 
     return (
       <section className="flex flex-row-reverse pt-5 px-7 fixed top-0 w-full items-center">
-        <button className="ml-5" onClick={this.switchSiderbarVisible}>
+        <button className="ml-5 relative" onClick={this.switchSiderbarVisible}>
           <SideListIcon sidebarVisible={sidebarVisible} />
+
+          {hasTodo ? (
+            <span className="w-2 h-2 rounded-full bg-amber-400 dark:bg-amber-300 block absolute -top-0.5 -right-1.5">
+              <span
+                className="animate-ping absolute inline-flex rounded-full h-full w-full bg-amber-300 top-0 -right-0 opacity-70"
+                style={{ animationIterationCount: "6" }}
+              />
+            </span>
+          ) : (
+            ""
+          )}
         </button>
 
         {/* Switch Dark Mode Button */}

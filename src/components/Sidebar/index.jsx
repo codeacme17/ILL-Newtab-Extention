@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Draggable from "react-draggable";
+
 import Todo from "./Todo";
 import Calendar from "./Calendar";
 import Weather from "./Weather";
@@ -18,7 +19,7 @@ export default class Sidebar extends Component {
           grid={[10, 1]}
         >
           <div>
-            <Calendar />
+            <Todo />
           </div>
         </Draggable>
 
@@ -31,7 +32,7 @@ export default class Sidebar extends Component {
           grid={[10, 1]}
         >
           <div>
-            <Todo />
+            <Calendar />
           </div>
         </Draggable>
 
