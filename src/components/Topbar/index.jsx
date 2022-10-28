@@ -9,17 +9,18 @@ export default class Topbar extends Component {
     darkMode: Boolean,
   };
 
-  // Show Sidebar switch button hanlder
-  switchSiderbarVisible = () => {
-    if (this.state.sidebarVisible) this.setState({ sidebarVisible: false });
-    else this.setState({ sidebarVisible: true });
-  };
-
   // Get dark mode state from localstorage
   componentDidMount = () => {
     const localData = JSON.parse(localStorage.getItem("_setting_data"));
-    this.setState({ darkMode: localData.darkMode });
+    this.setState({ darkMode: localData.darkMode, sidebarVisible: localData.sidebar.open });
     this.switchDarkClass(localData.darkMode);
+  };
+
+  // Show Sidebar switch button hanlder
+  switchSiderbarVisible = () => {
+    this.props.switchSiderbarVisible(!this.state.sidebarVisible);
+    if (this.state.sidebarVisible) this.setState({ sidebarVisible: false });
+    else this.setState({ sidebarVisible: true });
   };
 
   // Dark Mode switch button hanlder

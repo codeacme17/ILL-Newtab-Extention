@@ -8,7 +8,7 @@ import "./index.scss";
 export default class Sidebar extends Component {
   render() {
     return (
-      <section className="silder">
+      <section className={`silder ${this.props.sidebarVisible ? "_show" : "_hide"}`}>
         <Draggable
           axis="y"
           handle=".drag-handle"

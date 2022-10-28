@@ -125,19 +125,20 @@ export default class Todo extends Component {
                 return (
                   /* Sigle tode item */
                   <div
-                    className="todo_item flex justify-between py-2.5 pr-3 pl-1 border-main-400"
+                    className="todo_item flex justify-between py-2.5 pr-1 pl-1 border-main-400"
                     key={item.id}
                   >
-                    <div className="font-semibold text-sm flex items-center">
+                    <div className="font-semibold text-sm flex flex-1 pr-1 items-center justify-between">
                       <div
-                        className={`w-1.5 h-[60%] rounded-xl mr-2 
+                        className={`w-1.5 h-[60%] rounded-xl pr-2 
                         ${item.level === "1" ? "bg-gray-400 dark:bg-gray-600" : ""} 
                         ${item.level === "2" ? "bg-sky-400 dark:bg-sky-600" : ""}
                         ${item.level === "3" ? "bg-rose-400 dark:bg-rose-600" : ""}
                         `}
                       />
-                      <div className="flex-1">{item.content}</div>
+                      <div className="flex-1 pl-2 break-words w-[272px]">{item.content}</div>
                     </div>
+
                     {detailVisible ? (
                       <button className="cancel_btn" onClick={() => this.cancelTodo(index)}>
                         <DeleteIcon />
