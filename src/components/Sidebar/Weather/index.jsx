@@ -35,16 +35,13 @@ export default class Weather extends Component {
     const res = {
       data: {
         now: {
-          obsTime: "2022-10-26T12:26+08:00",
           temp: "17",
           feelsLike: "14",
           icon: "101",
           text: "Cloudy",
-          wind360: "135",
           windDir: "SE",
           windScale: "4",
           windSpeed: "20",
-          humidity: "60",
           precip: "0.0",
           pressure: "1019",
           vis: "30",

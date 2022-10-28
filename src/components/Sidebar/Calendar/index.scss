@@ -1,0 +1,49 @@
+.react-calendar__navigation {
+  @apply flex mb-3;
+
+  button {
+    @apply border-[1px] border-main-200 dark:border-main-600 rounded-lg;
+  }
+  .react-calendar__navigation__label__labelText {
+    font-size: 13px !important;
+  }
+  .react-calendar__navigation__prev2-button,
+  .react-calendar__navigation__prev-button {
+    @apply w-7 mr-1;
+  }
+  .react-calendar__navigation__next-button,
+  .react-calendar__navigation__next2-button {
+    @apply w-7 ml-1;
+  }
+}
+
+.react-calendar__viewContainer {
+  @apply text-sm;
+
+  .react-calendar__century-view__decades__decade,
+  .react-calendar__decade-view__years__year,
+  .react-calendar__year-view__months__month {
+    @apply my-1;
+  }
+
+  .react-calendar__month-view__weekdays {
+    @apply mb-2;
+    .react-calendar__month-view__weekdays__weekday {
+      @apply text-center;
+    }
+  }
+
+  .react-calendar__month-view__days__day {
+    @apply my-0.5 cursor-auto pointer-events-none select-none;
+
+    &.react-calendar__month-view__days__day--neighboringMonth {
+      @apply text-main-400 dark:text-main-600;
+    }
+
+    &.react-calendar__tile--active {
+      abbr {
+        @apply px-2 rounded-full text-main-100 bg-sky-500 dark:bg-sky-600;
+      }
+    }
+  }
+}

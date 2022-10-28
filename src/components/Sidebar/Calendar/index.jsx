@@ -1,41 +1,49 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import ReactCalendar from "react-calendar";
 import ArrowupIcon from "../../../icons/arrowup";
+import "./index.scss";
 
-export default class Calendar extends Component {
-  constructor() {
-    super();
+// Get the currrent date to mounte in header
+function getHeaderDate() {
+  const d = new Date();
+  return `${d.toDateString()}`;
+}
 
-    this.state = {
-      nowDate: "Oct 24,2022 Monday",
-      detailVisible: false,
-    };
-  }
+export default function Calendar() {
+  const [date, setDate] = useState(new Date());
+  const [detailVisible, setDetailVisible] = useState(Boolean);
+
+  let localData;
+  useEffect(() => {
+    localData = JSON.parse(localStorage.getItem("_setting_data"));
+    setDetailVisible(localData.calendar.open);
+  });
 
   // Switch detail content visible handler
-  switchDetailVisible = () => {
-    if (this.state.detailVisible) this.setState({ detailVisible: false });
-    else this.setState({ detailVisible: true });
+  const switchDetailVisible = () => {
+    if (detailVisible) setDetailVisible(false);
+    else setDetailVisible(true);
+    localData.calendar.open = !detailVisible;
+    localStorage.setItem("_setting_data", JSON.stringify(localData));
   };
 
-  render() {
-    const { nowDate, detailVisible } = this.state;
+  return (
+    <section className="silder-item">
+      <div className="header drag-handle">
+        {getHeaderDate()}
+        <button
+          className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}
+          onClick={switchDetailVisible}
+        >
+          <ArrowupIcon />
+        </button>
+      </div>
 
-    return (
-      <section className="silder-item">
-        <div className="header drag-handle">
-          {nowDate}
-          <button
-            className={`draw-btn ${detailVisible ? "rotate-0" : "rotate-180"}`}
-            onClick={this.switchDetailVisible}
-          >
-            <ArrowupIcon />
-          </button>
+      <div className={`content ${detailVisible ? "h-60 p-3" : "h-0 p-0"}`}>
+        <div>
+          <ReactCalendar onChange={setDate} value={date} />
         </div>
-
-        <div className={`content ${detailVisible ? "h-60 p-3" : "h-0 p-0"}`}>
-          <div></div>
-        </div>
-      </section>
-    );
-  }
+      </div>
+    </section>
+  );
 }
