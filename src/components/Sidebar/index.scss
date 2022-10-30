@@ -2,10 +2,9 @@
 
 @layer components {
   .silder {
-    height: calc(100% - 4rem);
     transition: background-color, opacity, right, 0.3s ease-in-out;
     width: 370px;
-    @apply pr-1 p-2 mt-16 fixed right-0 top-0 overflow-y-scroll flex flex-col items-center rounded-lg z-10 pointer-events-none;
+    @apply pr-1 p-2 mt-16 fixed right-0 top-0 bottom-10 overflow-y-scroll flex flex-col items-center rounded-lg z-10;
 
     &::-webkit-scrollbar {
       @apply bg-none w-1;

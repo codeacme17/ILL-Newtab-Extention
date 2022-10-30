@@ -51,7 +51,7 @@ export default class Sidebar extends Component {
     this.getCurrenRefOffsetTopValue(itemRef);
   };
 
-  // Diff the item and update
+  // Diff the items and update sort list
   stopDrag = (itemRef, index) => {
     this.getLocalData();
     itemRef.current.state.y = 0;
@@ -108,7 +108,6 @@ export default class Sidebar extends Component {
                 key="todo"
                 axis="y"
                 handle=".drag-handle"
-                bounds="parent"
                 cancel="button"
                 onStart={() => this.startDrag(this.TodoRef, index)}
                 onStop={() => this.stopDrag(this.TodoRef, index)}
@@ -127,7 +126,6 @@ export default class Sidebar extends Component {
                 key="calendar"
                 axis="y"
                 handle=".drag-handle"
-                bounds="parent"
                 cancel="button"
                 onStart={() => this.startDrag(this.CalendarRef, index)}
                 onStop={() => this.stopDrag(this.CalendarRef, index)}
@@ -146,7 +144,6 @@ export default class Sidebar extends Component {
                 key="weather"
                 axis="y"
                 handle=".drag-handle"
-                bounds="parent"
                 cancel="button"
                 onStart={() => this.startDrag(this.WeatherRef, index)}
                 onStop={() => this.stopDrag(this.WeatherRef, index)}

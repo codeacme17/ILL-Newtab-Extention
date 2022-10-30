@@ -73,6 +73,7 @@ export default class Search extends Component {
             type="text"
             className="w-[620px] h-12 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
             placeholder="SEARCH YOU WANT"
+            style={{ fontSize: "16px" }}
             ref={this.InputRef}
             onKeyUp={this.search}
           />

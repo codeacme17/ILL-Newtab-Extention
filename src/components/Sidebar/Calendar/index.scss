@@ -1,11 +1,11 @@
 .react-calendar__navigation {
+  font-size: 14px !important;
   @apply flex mb-3;
 
   button {
+    padding-bottom: 1px;
+    padding-top: 2px;
     @apply border-[1px] border-main-200 dark:border-main-600 rounded-lg;
-  }
-  .react-calendar__navigation__label__labelText {
-    font-size: 13px !important;
   }
   .react-calendar__navigation__prev2-button,
   .react-calendar__navigation__prev-button {
@@ -24,6 +24,9 @@
   .react-calendar__decade-view__years__year,
   .react-calendar__year-view__months__month {
     @apply my-1;
+    &.react-calendar__tile--now {
+      @apply px-2 rounded-full text-main-100 bg-sky-500 dark:bg-sky-700;
+    }
   }
 
   .react-calendar__month-view__weekdays {
