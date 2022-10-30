@@ -21,7 +21,14 @@ export default class App extends Component {
       this.localData = {
         darkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
         searchEngine: "bing",
-        sidebar: { open: false },
+        sidebar: {
+          open: false,
+          sortList: [
+            { type: "calendar", offsetTop: 0, height: 0 },
+            { type: "weather", offsetTop: 0, height: 0 },
+            { type: "todo", offsetTop: 0, height: 0 },
+          ],
+        },
         weather: { open: true },
         todo: { open: true, list: [] },
         calendar: { open: true },
