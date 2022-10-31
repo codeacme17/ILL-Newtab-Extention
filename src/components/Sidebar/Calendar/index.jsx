@@ -27,7 +27,7 @@ export default function Calendar() {
   useEffect(() => {
     getLocalData();
     setDetailVisible(localData.calendar.open);
-  });
+  }, []);
 
   // Switch detail content visible handler
   const switchDetailVisible = () => {

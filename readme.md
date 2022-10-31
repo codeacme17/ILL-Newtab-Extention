@@ -1,19 +1,19 @@
-# Google Tab
+# New tab for chrome extention
 
-A chrome extension for Edge browser to create a new tab similar to Google Chrome.
+It's a chrome extention to create a new tab.
 
-## why?
+> Inspiration from window11 and macOS notice bar.
 
-In my opnion, I really like the experience of Edge browser, but I don't like Bing tabs. So I made an extension to change the default tabs.
+<!-- ## What we have ?
 
-## How to use
+In the first release version, we only have 3 tools.
+They are: - Weather - Calendar - Todo list.
+But I really wish that more programmers can develop more tools and features to this extention.
 
-You can download this compressed package in your computer, and plug it into your Edge.
+### Weather Tool
 
-You may come across some setup options, don't worry, everything is safe.
+It's a simple weather component, and the API is from https://www.qweather.com/ (Thanks for qweather provides that amazing and free apis).
 
-Hope you like.
+### Calendar Tool
 
-## Some Features
-
-If your ip is in some regions that do not support google (such as China), the search engine will automatically switch to Baidu.
+I made this tool by using the three-part react plugin called "react-calendar". -->
