@@ -58,6 +58,9 @@ export default class Search extends Component {
     }
   };
 
+  // Check did user input a shortcut
+  shortcutHanlder = () => {};
+
   render() {
     const { searchEngine } = this.state;
 
