@@ -7,10 +7,6 @@ import Weather from "./Weather";
 import "./index.scss";
 
 export default class Sidebar extends Component {
-  TodoRef = createRef();
-  CalendarRef = createRef();
-  WeatherRef = createRef();
-
   getLocalData = () => {
     this.localData = JSON.parse(localStorage.getItem("_setting_data"));
   };
@@ -24,18 +20,18 @@ export default class Sidebar extends Component {
     this.setState({ sortList: this.localData.sidebar.sortList });
   };
 
-  state = {
-    // The sort list to render items in sider bar
-    sortList: [],
-  };
-
-  // An array to store the different refs
-  refsList = [this.TodoRef, this.CalendarRef, this.WeatherRef];
+  // The sort list to render items in sider bar
+  state = { sortList: [] };
+  TodoRef = createRef();
+  CalendarRef = createRef();
+  WeatherRef = createRef();
 
   // Get each ref's offset top value & height to push in to the sort list,
   // when start drag item
   startDrag = (itemRef) => {
-    this.refsList.forEach((itemRef) => {
+    // An array to store the different refs
+    const refsList = [this.TodoRef, this.CalendarRef, this.WeatherRef];
+    refsList.forEach((itemRef) => {
       this.state.sortList.forEach((item) => {
         if (itemRef.current._reactInternals.key === item.type) {
           item.offsetTop = this.getRefOffsetTopValue(itemRef);
@@ -55,9 +51,9 @@ export default class Sidebar extends Component {
     return itemRef.current._reactInternals.child.child.stateNode.offsetTop;
   };
 
-  // Get current dragging ref's offsetValue,
+  // Get current ref's offsetTop Value,
   // while dragging the ref
-  dragging = (itemRef, index) => {
+  dragging = (itemRef) => {
     this.getCurrenRefOffsetTopValue(itemRef);
   };
 
@@ -70,25 +66,32 @@ export default class Sidebar extends Component {
 
   // Diff the items and update sort list
   // When stop drag the item
-  stopDrag = (itemRef, index) => {
+  stopDrag = (index) => {
     this.getLocalData();
-    this.state.sortList.forEach((item, j) => {
-      if (j === index) return;
-      if (this.currentRefOffsetTopValue - item.offsetTop - 30 < 0 && index > j) {
-        this.transferSortListItem(index, j);
-      }
-      if (this.currentRefOffsetTopValue - item.offsetTop - item.height + 30 > 0 && index < j) {
-        this.transferSortListItem(index++, j);
-      }
-    });
+    this.diffItemsPosition(index);
     // Reset current ref offset top value
     this.currentRefOffsetTopValue = undefined;
     this.localData.sidebar.sortList = this.state.sortList;
     this.setLocalData();
   };
 
+  // Diff the items position
+  diffItemsPosition = (index) => {
+    this.state.sortList.forEach((item, j) => {
+      if (j === index) return;
+      // Drag up
+      if (this.currentRefOffsetTopValue - item.offsetTop - 10 < 0 && index > j) {
+        this.transferItems(index, j);
+      }
+      // Drag down
+      if (this.currentRefOffsetTopValue - item.offsetTop - item.height + 30 > 0 && index < j) {
+        this.transferItems(index++, j);
+      }
+    });
+  };
+
   // Switch both items in sort array
-  transferSortListItem = (i, j) => {
+  transferItems = (i, j) => {
     let temp;
     let sortList = this.state.sortList;
     temp = sortList[i];
@@ -112,9 +115,9 @@ export default class Sidebar extends Component {
                 cancel="button"
                 ref={this.TodoRef}
                 position={{ x: 0, y: 0 }}
-                onStart={() => this.startDrag(this.TodoRef, index)}
-                onStop={() => this.stopDrag(this.TodoRef, index)}
-                onDrag={() => this.dragging(this.TodoRef, index)}
+                onStart={() => this.startDrag(this.TodoRef)}
+                onStop={() => this.stopDrag(index)}
+                onDrag={() => this.dragging(this.TodoRef)}
               >
                 <div>
                   <Todo />
@@ -131,9 +134,9 @@ export default class Sidebar extends Component {
                 cancel="button"
                 ref={this.CalendarRef}
                 position={{ x: 0, y: 0 }}
-                onStart={() => this.startDrag(this.CalendarRef, index)}
-                onStop={() => this.stopDrag(this.CalendarRef, index)}
-                onDrag={() => this.dragging(this.CalendarRef, index)}
+                onStart={() => this.startDrag(this.CalendarRef)}
+                onStop={() => this.stopDrag(index)}
+                onDrag={() => this.dragging(this.CalendarRef)}
               >
                 <div>
                   <Calendar />
@@ -150,9 +153,9 @@ export default class Sidebar extends Component {
                 cancel="button"
                 ref={this.WeatherRef}
                 position={{ x: 0, y: 0 }}
-                onStart={() => this.startDrag(this.WeatherRef, index)}
-                onStop={() => this.stopDrag(this.WeatherRef, index)}
-                onDrag={() => this.dragging(this.WeatherRef, index)}
+                onStart={() => this.startDrag(this.WeatherRef)}
+                onStop={() => this.stopDrag(index)}
+                onDrag={() => this.dragging(this.WeatherRef)}
               >
                 <div>
                   <Weather />
