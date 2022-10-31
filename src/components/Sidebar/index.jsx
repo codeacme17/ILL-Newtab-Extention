@@ -39,10 +39,20 @@ export default class Sidebar extends Component {
       this.state.sortList.forEach((item) => {
         if (itemRef.current._reactInternals.key === item.type) {
           item.offsetTop = this.getRefOffsetTopValue(itemRef);
-          item.height = this.getRefHeight(itemRef);
+          item.height = this.getRefHeightValue(itemRef);
         }
       });
     });
+  };
+
+  // Get each ref's height value
+  getRefHeightValue = (itemRef) => {
+    return itemRef.current._reactInternals.child.child.stateNode.clientHeight;
+  };
+
+  // Get each ref's offsetTop value
+  getRefOffsetTopValue = (itemRef) => {
+    return itemRef.current._reactInternals.child.child.stateNode.offsetTop;
   };
 
   // Get current dragging ref's offsetValue,
@@ -51,10 +61,17 @@ export default class Sidebar extends Component {
     this.getCurrenRefOffsetTopValue(itemRef);
   };
 
+  // Get current dragging ref's offsetTop value
+  getCurrenRefOffsetTopValue = (itemRef) => {
+    let pre = this.getRefOffsetTopValue(itemRef);
+    let now = pre + itemRef.current.state.y - 16;
+    this.currentRefOffsetTopValue = now;
+  };
+
   // Diff the items and update sort list
+  // When stop drag the item
   stopDrag = (itemRef, index) => {
     this.getLocalData();
-    itemRef.current.state.y = 0;
     this.state.sortList.forEach((item, j) => {
       if (j === index) return;
       if (this.currentRefOffsetTopValue - item.offsetTop - 30 < 0 && index > j) {
@@ -68,22 +85,6 @@ export default class Sidebar extends Component {
     this.currentRefOffsetTopValue = undefined;
     this.localData.sidebar.sortList = this.state.sortList;
     this.setLocalData();
-  };
-
-  getRefHeight = (itemRef) => {
-    return itemRef.current._reactInternals.child.child.stateNode.clientHeight;
-  };
-
-  // Get each ref's offsetTop value
-  getRefOffsetTopValue = (itemRef) => {
-    return itemRef.current._reactInternals.child.child.stateNode.offsetTop;
-  };
-
-  // Get current ref's offsetTop value
-  getCurrenRefOffsetTopValue = (itemRef) => {
-    let pre = this.getRefOffsetTopValue(itemRef);
-    let now = pre + itemRef.current.state.y - 16;
-    this.currentRefOffsetTopValue = now;
   };
 
   // Switch both items in sort array
@@ -109,10 +110,11 @@ export default class Sidebar extends Component {
                 axis="y"
                 handle=".drag-handle"
                 cancel="button"
+                ref={this.TodoRef}
+                position={{ x: 0, y: 0 }}
                 onStart={() => this.startDrag(this.TodoRef, index)}
                 onStop={() => this.stopDrag(this.TodoRef, index)}
                 onDrag={() => this.dragging(this.TodoRef, index)}
-                ref={this.TodoRef}
               >
                 <div>
                   <Todo />
@@ -127,10 +129,11 @@ export default class Sidebar extends Component {
                 axis="y"
                 handle=".drag-handle"
                 cancel="button"
+                ref={this.CalendarRef}
+                position={{ x: 0, y: 0 }}
                 onStart={() => this.startDrag(this.CalendarRef, index)}
                 onStop={() => this.stopDrag(this.CalendarRef, index)}
                 onDrag={() => this.dragging(this.CalendarRef, index)}
-                ref={this.CalendarRef}
               >
                 <div>
                   <Calendar />
@@ -145,10 +148,11 @@ export default class Sidebar extends Component {
                 axis="y"
                 handle=".drag-handle"
                 cancel="button"
+                ref={this.WeatherRef}
+                position={{ x: 0, y: 0 }}
                 onStart={() => this.startDrag(this.WeatherRef, index)}
                 onStop={() => this.stopDrag(this.WeatherRef, index)}
                 onDrag={() => this.dragging(this.WeatherRef, index)}
-                ref={this.WeatherRef}
               >
                 <div>
                   <Weather />
