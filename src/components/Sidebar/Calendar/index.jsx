@@ -32,9 +32,8 @@ export default function Calendar() {
   // Switch detail content visible handler
   const switchDetailVisible = () => {
     getLocalData();
-    if (detailVisible) setDetailVisible(false);
-    else setDetailVisible(true);
     localData.calendar.open = !detailVisible;
+    setDetailVisible(!detailVisible);
     setLocalData();
   };
 

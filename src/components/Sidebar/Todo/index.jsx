@@ -24,19 +24,6 @@ export default class Todo extends Component {
     this.setState({ detailVisible: this.localData.todo.open, todoList: this.localData.todo.list });
   };
 
-  // Switch detail content visible handler
-  switchDetailVisible = () => {
-    this.getLocalData();
-    if (this.state.detailVisible) {
-      this.setState({ detailVisible: false });
-      this.localData.todo.open = false;
-    } else {
-      this.setState({ detailVisible: true });
-      this.localData.todo.open = true;
-    }
-    this.setLocalData();
-  };
-
   // Add todo task
   addTodo = (e) => {
     if (e.keyCode !== 13) return;
@@ -50,14 +37,12 @@ export default class Todo extends Component {
 
     const newTodoItem = { id: nanoid(), content: "", level: "" };
     const resValue = this.getTodoLevel(e.target.value);
-
     if (!resValue.value.trim()) return;
     newTodoItem.content = resValue.value;
     newTodoItem.level = resValue.level;
 
     this.state.todoList.push(newTodoItem);
     e.target.value = "";
-
     this.setState({ todoList: this.state.todoList });
     this.localData.todo.list = this.state.todoList;
     this.setLocalData();
@@ -66,24 +51,14 @@ export default class Todo extends Component {
   // Get the level from user input
   getTodoLevel = (value) => {
     const levels = ["1", "2", "3"];
-    let array = value.split("#");
-    let level = array[array.length - 1];
+    const array = value.split("#");
+    const level = array[array.length - 1];
     if (levels.indexOf(level.trim()) !== -1) {
-      if (array.length === 2)
-        return {
-          value: array[0],
-          level: level.trim(),
-        };
+      if (array.length === 2) return { value: array[0], level: level.trim() };
       if (array.length > 2)
-        return {
-          value: array.slice(0, array.length - 1).join("#"),
-          level: level.trim(),
-        };
+        return { value: array.slice(0, array.length - 1).join("#"), level: level.trim() };
     }
-    return {
-      value,
-      level: "1",
-    };
+    return { value, level: "1" };
   };
 
   // Cancel todo task
@@ -92,6 +67,14 @@ export default class Todo extends Component {
     this.state.todoList.splice(index, 1);
     this.setState({ todoList: this.state.todoList });
     this.localData.todo.list = this.state.todoList;
+    this.setLocalData();
+  };
+
+  // Switch detail content visible handler
+  switchDetailVisible = () => {
+    this.getLocalData();
+    this.localData.todo.open = !this.state.detailVisible;
+    this.setState({ detailVisible: !this.state.detailVisible });
     this.setLocalData();
   };
 

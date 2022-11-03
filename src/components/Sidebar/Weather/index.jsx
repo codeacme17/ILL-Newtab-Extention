@@ -89,13 +89,8 @@ export default class Weather extends Component {
   // Switch detail content visible handler
   switchDetailVisible = () => {
     this.getLocalData();
-    if (this.state.detailVisible) {
-      this.setState({ detailVisible: false });
-      this.localData.weather.open = false;
-    } else {
-      this.setState({ detailVisible: true });
-      this.localData.weather.open = true;
-    }
+    this.localData.weather.open = !this.state.detailVisible;
+    this.setState({ detailVisible: !this.state.detailVisible });
     this.setLocalData();
   };
 
