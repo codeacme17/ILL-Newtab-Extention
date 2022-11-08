@@ -15,12 +15,16 @@ export default class Weather extends Component {
 
   state = {
     detailVisible: false,
-    // requestState: The state of request QWeather's API;
-    // "0" - loading (default)
-    // "1" - request success
-    // "2" - request error
-    // "3" - browser not allow user access current position
+    /**
+     *  @state requestState: The state of request QWeather's API;
+     *
+     *  @value "0" - component loading (default)
+     *  @value "1" - http request success
+     *  @value "2" - http request error
+     *  @value "3" - browser position error
+     */
     requestState: "0",
+    errorMessage: "",
     weatherData: {},
   };
 
@@ -28,62 +32,46 @@ export default class Weather extends Component {
     // Get state of weather item from local storage
     this.getLocalData();
     this.setState({ detailVisible: this.localData.weather.open });
-    let res;
 
     // Request QWeather's API to get the weather data
     if (process.env.NODE_ENV !== "development") {
-      const location = await this.getLocation();
-      res = await GetWeather({
-        location,
-      });
-      if (res.data.code !== "200") {
-        this.setState({ requestState: "2" });
-        return;
-      }
-      this.setState({ requestState: "1" });
-    } else {
-      res = {
-        data: {
-          now: {
-            temp: "17",
-            feelsLike: "14",
-            icon: "101",
-            text: "Cloudy",
-            windDir: "SE",
-            windScale: "4",
-            windSpeed: "20",
-            precip: "0.0",
-            pressure: "1019",
-            vis: "30",
-            cloud: "100",
-            dew: "10",
-          },
-        },
-      };
+      this.getWeatherData();
     }
-    this.setState({ requestState: "1" });
-    this.setState({ weatherData: res.data.now });
   };
 
-  // Get the current location of the user
-  getLocation = () => {
+  // Get the current position of the user
+  getPosition = () => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
     const that = this;
     return new Promise((resolve, reject) => {
-      const options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      };
-      let position;
       function success(pos) {
-        position = `${pos.coords.longitude.toFixed(2)},${pos.coords.latitude.toFixed(2)}`;
+        let position = `${pos.coords.longitude.toFixed(2)},${pos.coords.latitude.toFixed(2)}`;
         resolve(position);
       }
       function error(err) {
-        that.setState({ requestState: "3" });
+        that.setState({ requestState: "3", errorMessage: err.message });
+        reject(err);
       }
       navigator.geolocation.getCurrentPosition(success, error, options);
     });
+  };
+
+  // Access qweather api
+  getWeatherData = async () => {
+    const location = await this.getPosition();
+    console.log(location);
+    let res = await GetWeather({
+      location,
+    });
+    if (res.data.code !== "200") {
+      this.setState({ requestState: "2" });
+      return;
+    }
+    this.setState({ requestState: "1", weatherData: res.data.now });
   };
 
   // Switch detail content visible handler
@@ -95,7 +83,7 @@ export default class Weather extends Component {
   };
 
   render() {
-    const { detailVisible, requestState, weatherData } = this.state;
+    const { detailVisible, requestState, weatherData, errorMessage } = this.state;
 
     return (
       <section className="silder-item">
@@ -119,7 +107,7 @@ export default class Weather extends Component {
 
           <div className="py-1 pl-1 text-rose-600 dark:text-rose-500 font-normal italic">
             {requestState === "2" ? "Request Error !" : ""}
-            {requestState === "3" ? "Please allow page for positioning !" : ""}
+            {requestState === "3" ? `${errorMessage}` : ""}
           </div>
 
           <button

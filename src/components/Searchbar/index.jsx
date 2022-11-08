@@ -140,7 +140,9 @@ export default class Search extends Component {
             <FavList />
           </div>
         ) : (
-          ""
+          {
+            /* empty */
+          }
         )}
       </section>
     );
