@@ -21,7 +21,7 @@ export default class Search extends Component {
 
   state = {
     searchEngine: this.BING_URL,
-    favListVisible: true,
+    favListVisible: false,
   };
 
   // Mount search engine
@@ -126,12 +126,12 @@ export default class Search extends Component {
           </label>
 
           {/* Trigger Fav List Button */}
-          <div
+          {/* <div
             onClick={this.switchFavListVisible}
             className="cursor-pointer absolute w-full rounded-lg h-3 mt-3 dark:border-main-500 border-[1px]"
           >
             Fav List
-          </div>
+          </div> */}
         </div>
 
         {/* Fav List */}
@@ -140,9 +140,7 @@ export default class Search extends Component {
             <FavList />
           </div>
         ) : (
-          {
-            /* empty */
-          }
+          ""
         )}
       </section>
     );

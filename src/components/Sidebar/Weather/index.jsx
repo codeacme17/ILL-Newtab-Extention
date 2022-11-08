@@ -34,7 +34,7 @@ export default class Weather extends Component {
     this.setState({ detailVisible: this.localData.weather.open });
 
     // Request QWeather's API to get the weather data
-    if (process.env.NODE_ENV !== "development") {
+    if (true || process.env.NODE_ENV !== "development") {
       this.getWeatherData();
     }
   };
@@ -63,7 +63,6 @@ export default class Weather extends Component {
   // Access qweather api
   getWeatherData = async () => {
     const location = await this.getPosition();
-    console.log(location);
     let res = await GetWeather({
       location,
     });
