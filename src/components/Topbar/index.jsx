@@ -55,7 +55,7 @@ export default class Topbar extends Component {
     const { sidebarVisible, darkMode, hasTodo } = this.state;
 
     return (
-      <section className="flex flex-row-reverse pt-5 px-7 fixed top-0 w-full items-center">
+      <section className="flex flex-row-reverse pt-5 px-7 fixed top-0 w-full items-center z-20">
         <button className="ml-5 relative" onClick={this.switchSiderbarVisible}>
           <SideListIcon sidebarVisible={sidebarVisible} />
 

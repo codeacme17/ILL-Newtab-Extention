@@ -34,7 +34,7 @@ export default class Weather extends Component {
     this.setState({ detailVisible: this.localData.weather.open });
 
     // Request QWeather's API to get the weather data
-    if (true || process.env.NODE_ENV !== "development") {
+    if (process.env.NODE_ENV !== "development") {
       this.getWeatherData();
     }
   };

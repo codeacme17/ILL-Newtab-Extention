@@ -5,6 +5,7 @@ import SearchIcon from "../../icons/search";
 import BingIcon from "../../icons/bing";
 import GoogleIcon from "../../icons/google";
 import BaiduIcon from "../../icons/baidu";
+import ArrowdownIcon from "../../icons/arrowdown";
 
 export default class Search extends Component {
   getLocalData = () => {
@@ -126,12 +127,14 @@ export default class Search extends Component {
           </label>
 
           {/* Trigger Fav List Button */}
-          {/* <div
+          <div
             onClick={this.switchFavListVisible}
-            className="cursor-pointer absolute w-full rounded-lg h-3 mt-3 dark:border-main-500 border-[1px]"
+            className="cursor-pointer absolute w-full rounded-lg mt-3 hover:bg-main-200 hover:dark:bg-main-800 duration-200 opacity-40 transition-bg flex justify-center invisible hover:visible"
           >
-            Fav List
-          </div> */}
+            <div className={`${favListVisible ? "rotate-180" : "rotate-0"}`}>
+              <ArrowdownIcon />
+            </div>
+          </div>
         </div>
 
         {/* Fav List */}
