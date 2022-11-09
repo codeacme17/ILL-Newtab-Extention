@@ -1,12 +1,11 @@
 import React, { Component, createRef } from "react";
 
-import FavList from "./favList/index";
+import FavList from "./FavList";
 import SearchIcon from "../../icons/search";
 import BingIcon from "../../icons/bing";
 import GoogleIcon from "../../icons/google";
 import BaiduIcon from "../../icons/baidu";
 import ArrowdownIcon from "../../icons/arrowdown";
-import "./index.scss";
 
 export default class Search extends Component {
   getLocalData = () => {
@@ -130,9 +129,9 @@ export default class Search extends Component {
           {/* Trigger Fav List Button */}
           <div
             onClick={this.switchFavListVisible}
-            className="favlist_trigger_btn cursor-pointer absolute w-full rounded-lg mt-3 hover:bg-main-200 hover:dark:bg-main-800 duration-200 opacity-40 transition-bg flex justify-center delay-100"
+            className="cursor-pointer absolute w-full rounded-xl mt-3 hover:bg-main-200 hover:dark:bg-main-800 duration-200 opacity-40 transition-background flex justify-center delay-100"
           >
-            <div className={`favlist_trigger_icon ${favListVisible ? "rotate-180" : "rotate-0"}`}>
+            <div className={`${favListVisible ? "rotate-180" : "rotate-0"}`}>
               <ArrowdownIcon />
             </div>
           </div>
