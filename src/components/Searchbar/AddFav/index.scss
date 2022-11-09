@@ -3,21 +3,23 @@
 @layer components {
   .dialog_container {
     animation: fade 0.2s linear;
-  }
+    @apply w-screen h-screen fixed top-0 left-0 flex justify-center items-start bg-main-100 dark:bg-main-900 dark:bg-opacity-50 bg-opacity-50 backdrop-blur-sm z-50;
 
-  .dialog_card {
-    animation: slider 0.3s ease-in-out;
-  }
+    .dialog_card {
+      animation: slider 0.2s ease-in-out;
+      @apply flex mt-[120px];
 
-  .form_input {
-    @apply mt-2;
+      .form_input {
+        @apply mt-2;
 
-    label {
-      @apply block text-sm mb-1 select-none;
-    }
+        label {
+          @apply block text-sm mb-1 select-none;
+        }
 
-    input {
-      @apply w-full outline-none rounded-md px-3 py-1.5 bg-main-100 dark:bg-main-700 shadow-inner text-main-900 dark:text-main-100;
+        input {
+          @apply w-full outline-none rounded-md px-3 py-1.5 bg-main-100 dark:bg-main-700 shadow-inner text-main-900 dark:text-main-100 placeholder:text-sm placeholder:text-main-300 placeholder:dark:text-main-500;
+        }
+      }
     }
   }
 }
