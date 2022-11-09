@@ -15,6 +15,12 @@
         label {
           @apply block text-sm mb-1 select-none;
         }
+        label[aria-required] {
+          &::after {
+            content: "*";
+            @apply text-rose-500 dark:text-rose-400 ml-1;
+          }
+        }
 
         input {
           @apply w-full outline-none rounded-md px-3 py-1.5 bg-main-100 dark:bg-main-700 shadow-inner text-main-900 dark:text-main-100 placeholder:text-sm placeholder:text-main-300 placeholder:dark:text-main-500;

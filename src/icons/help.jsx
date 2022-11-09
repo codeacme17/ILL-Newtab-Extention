@@ -13,7 +13,7 @@ export default class HelpIcon extends Component {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        class="feather feather-help-circle"
+        className="feather feather-help-circle"
       >
         <circle cx="12" cy="12" r="10"></circle>
         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
