@@ -6,6 +6,7 @@ import BingIcon from "../../icons/bing";
 import GoogleIcon from "../../icons/google";
 import BaiduIcon from "../../icons/baidu";
 import ArrowdownIcon from "../../icons/arrowdown";
+import "./index.scss";
 
 export default class Search extends Component {
   getLocalData = () => {
@@ -22,7 +23,7 @@ export default class Search extends Component {
 
   state = {
     searchEngine: this.BING_URL,
-    favListVisible: false,
+    favListVisible: true,
   };
 
   // Mount search engine
@@ -129,9 +130,9 @@ export default class Search extends Component {
           {/* Trigger Fav List Button */}
           <div
             onClick={this.switchFavListVisible}
-            className="cursor-pointer absolute w-full rounded-lg mt-3 hover:bg-main-200 hover:dark:bg-main-800 duration-200 opacity-40 transition-bg flex justify-center invisible hover:visible"
+            className="favlist_trigger_btn cursor-pointer absolute w-full rounded-lg mt-3 hover:bg-main-200 hover:dark:bg-main-800 duration-200 opacity-40 transition-bg flex justify-center delay-100"
           >
-            <div className={`${favListVisible ? "rotate-180" : "rotate-0"}`}>
+            <div className={`favlist_trigger_icon ${favListVisible ? "rotate-180" : "rotate-0"}`}>
               <ArrowdownIcon />
             </div>
           </div>
