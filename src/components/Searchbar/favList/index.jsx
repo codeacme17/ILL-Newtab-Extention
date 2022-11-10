@@ -13,6 +13,7 @@ export default class FavList extends Component {
         url: "www.google.com",
         logoUrl: "www.google.com/favicon.ico",
         shortKey: "G",
+        reserveLogoUrl: "",
       },
       {
         id: nanoid(),
@@ -34,6 +35,10 @@ export default class FavList extends Component {
     this.setState(favList);
   };
 
+  fetchPicError = (e) => {
+    console.log(e);
+  };
+
   render() {
     const { addFavDialogVisible, favList } = this.state;
 
@@ -48,7 +53,13 @@ export default class FavList extends Component {
               href={`https://${item.url}`}
             >
               <div className="w-12 h-12 rounded-full bg-main-300 dark:bg-main-700 flex justify-center items-center">
-                <img src={`https://${item.logoUrl}`} alt="" className="w-8 h-8" />
+                <img
+                  // src={`https://${item.logoUrl}`}
+                  src={item.reserveLogoUrl}
+                  onError={this.fetchPicError}
+                  alt="123"
+                  className="w-8 h-8"
+                />
               </div>
               <div className="text-xs mt-3 overflow-hidden w-24 truncate text-center select-none">
                 {item.title}

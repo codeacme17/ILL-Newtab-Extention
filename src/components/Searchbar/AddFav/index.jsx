@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import HelpIcon from "../../../icons/help";
 import Help from "./Help";
@@ -12,6 +12,7 @@ export default class AddFavDialog extends Component {
       url: "",
       logoUrl: "",
       shortKey: "",
+      reserveLogoUrl: "",
     },
     btnDisabled: true,
     helpVisible: true,
@@ -34,7 +35,42 @@ export default class AddFavDialog extends Component {
     else this.setState({ btnDisabled: true });
   };
 
+  createReserveLogo = () => {
+    const favItem = this.state.favItem;
+    const canvas = this.drawReserveLogo(favItem);
+    const canvasURL = canvas.toDataURL("image/webp");
+    favItem.reserveLogoUrl = canvasURL;
+    this.setState({ favItem });
+  };
+
+  drawReserveLogo = (favItem) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 28;
+    canvas.height = 28;
+
+    const bgCtx = canvas.getContext("2d");
+    bgCtx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, 2 * Math.PI);
+    bgCtx.fillStyle = `hsl(${Math.random() * 1000}, 70%, 50%)`;
+    bgCtx.fill();
+
+    const textCtx = canvas.getContext("2d");
+    textCtx.shadowColor = "rgba(0, 0, 0, 0.2)";
+    textCtx.shadowOffsetX = 2;
+    textCtx.shadowOffsetY = 2;
+    textCtx.font = "bold 17px Poppins";
+    textCtx.fillStyle = "white";
+    textCtx.textAlign = "center";
+    textCtx.textBaseline = "middle";
+    textCtx.fillText(
+      favItem.title.substr(0, 1).toUpperCase(),
+      canvas.width / 2,
+      canvas.height / 2 + canvas.height / 16
+    );
+    return canvas;
+  };
+
   confirmAddItem = () => {
+    this.createReserveLogo();
     this.props.addItemtoFavList(this.state.favItem);
     this.props.switchAddFavDialogVisible(false);
   };
