@@ -74,7 +74,7 @@ export default class Search extends Component {
         {/* Search Container */}
         <div
           className={`duration-200 transition-[margin-top] ${
-            favListVisible ? "mt-[100px]" : "mt-[200px]"
+            favListVisible ? "mt-[150px]" : "mt-[240px]"
           }`}
         >
           {/* Search Input */}
