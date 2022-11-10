@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 
-import ArrowupIcon from "../../../icons/arrowup";
-import DeleteIcon from "../../../icons/delete";
+import ArrowupIcon from "icons/arrowup";
+import DeleteIcon from "icons/delete";
 import "./index.scss";
 
 export default class Todo extends Component {

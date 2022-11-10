@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import ArrowupIcon from "../../../icons/arrowup";
-import LoadingIcon from "../../../icons/loading";
-import { GetWeather } from "../../../apis";
+import ArrowupIcon from "icons/arrowup";
+import LoadingIcon from "icons/loading";
+import { GetWeather } from "apis";
 
 export default class Weather extends Component {
   getLocalData = () => {

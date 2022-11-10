@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactCalendar from "react-calendar";
 
-import ArrowupIcon from "../../../icons/arrowup";
+import ArrowupIcon from "icons/arrowup";
 import "./index.scss";
 
 let localData;

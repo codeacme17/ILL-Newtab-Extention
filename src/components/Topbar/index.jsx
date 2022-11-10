@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import SunIcon from "../../icons/sun";
-import MoonIcon from "../../icons/moon";
-import SideListIcon from "../../icons/sidelist";
+import SunIcon from "icons/sun";
+import MoonIcon from "icons/moon";
+import SideListIcon from "icons/sidelist";
 
 export default class Topbar extends Component {
   getLocalData = () => {

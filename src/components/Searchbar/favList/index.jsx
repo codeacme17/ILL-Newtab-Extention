@@ -3,11 +3,11 @@ import { nanoid } from "nanoid";
 
 import FavDialog from "./FavDialog";
 import SettingMenu from "./SettingMenu";
-import PlusIcon from "../../../icons/plus";
+import PlusIcon from "icons/plus";
 
 export default class FavList extends Component {
   state = {
-    addFavDialogVisible: false,
+    favDialogVisible: false,
     favList: [
       {
         id: nanoid(),
@@ -26,7 +26,7 @@ export default class FavList extends Component {
         reserveLogoUrl: "",
       },
     ],
-
+    dialogType: "",
     favMenuVisible: false,
     menuProps: {
       x: 0,
@@ -58,8 +58,8 @@ export default class FavList extends Component {
     this.setState({ menuProps });
   };
 
-  switchAddFavDialogVisible = (flag) => {
-    this.setState({ addFavDialogVisible: flag });
+  switchFavDialogVisible = (flag, type) => {
+    this.setState({ favDialogVisible: flag, dialogType: type });
   };
 
   // Push fav item to the fav list
@@ -67,6 +67,15 @@ export default class FavList extends Component {
     let favList = this.state.favList;
     favList.push(item);
     this.setState(favList);
+  };
+
+  // Modify fav item from fav list
+  modifyItemFormFavList = (item) => {
+    const favList = this.state.favList;
+    favList.forEach((favItem, index) => {
+      if (favItem.id === item.id) favList[index] = item;
+    });
+    this.setState({ favList });
   };
 
   // Delete fav item from fav list
@@ -84,7 +93,7 @@ export default class FavList extends Component {
   };
 
   render() {
-    const { addFavDialogVisible, favList, favMenuVisible, menuProps } = this.state;
+    const { favDialogVisible, favList, favMenuVisible, menuProps, dialogType } = this.state;
 
     return (
       <section className="flex  flex-wrap text-main-700 dark:text-main-400" ref={this.FavListRef}>
@@ -115,7 +124,7 @@ export default class FavList extends Component {
         {/* Add new list item */}
         <div
           className="w-1/5 px-3 py-5 flex flex-col items-center rounded-md hover:bg-main-200 hover:dark:bg-main-800 cursor-pointer"
-          onClick={() => this.switchAddFavDialogVisible(true)}
+          onClick={() => this.switchFavDialogVisible(true, "add")}
         >
           <div className="w-12 h-12 rounded-full bg-main-300 dark:bg-main-700 flex justify-center items-center">
             <PlusIcon />
@@ -123,11 +132,14 @@ export default class FavList extends Component {
           <div className="text-xs mt-3 overflow-hidden w-24 truncate text-center">ADD NEW</div>
         </div>
 
-        {/* Add fav item dialog */}
-        {addFavDialogVisible ? (
+        {/* Emit fav item dialog */}
+        {favDialogVisible ? (
           <FavDialog
-            switchAddFavDialogVisible={this.switchAddFavDialogVisible}
+            switchFavDialogVisible={this.switchFavDialogVisible}
             addItemtoFavList={this.addItemtoFavList}
+            modifyItemFormFavList={this.modifyItemFormFavList}
+            dialogType={dialogType}
+            itemProps={menuProps.item}
           />
         ) : (
           ""
@@ -139,6 +151,7 @@ export default class FavList extends Component {
             menuProps={menuProps}
             switchMenuVisible={this.switchMenuVisible}
             deleteItemformFavList={this.deleteItemformFavList}
+            switchFavDialogVisible={this.switchFavDialogVisible}
           />
         ) : (
           ""

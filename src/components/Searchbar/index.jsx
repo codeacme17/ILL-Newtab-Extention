@@ -1,11 +1,11 @@
 import React, { Component, createRef } from "react";
 
 import FavList from "./FavList";
-import SearchIcon from "../../icons/search";
-import BingIcon from "../../icons/bing";
-import GoogleIcon from "../../icons/google";
-import BaiduIcon from "../../icons/baidu";
-import ArrowdownIcon from "../../icons/arrowdown";
+import SearchIcon from "icons/search";
+import BingIcon from "icons/bing";
+import GoogleIcon from "icons/google";
+import BaiduIcon from "icons/baidu";
+import ArrowdownIcon from "icons/arrowdown";
 
 export default class Search extends Component {
   getLocalData = () => {
