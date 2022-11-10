@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { nanoid } from "nanoid";
-import AddFavDialog from "./AddFav";
+
+import FavDialog from "./FavDialog";
 import SettingMenu from "./SettingMenu";
 import PlusIcon from "../../../icons/plus";
-import { createRef } from "react";
 
 export default class FavList extends Component {
   state = {
@@ -62,18 +62,26 @@ export default class FavList extends Component {
     this.setState({ addFavDialogVisible: flag });
   };
 
+  // Push fav item to the fav list
   addItemtoFavList = (item) => {
     let favList = this.state.favList;
     favList.push(item);
     this.setState(favList);
   };
 
+  // Delete fav item from fav list
+  deleteItemformFavList = (item) => {
+    const favList = this.state.favList;
+    favList.forEach((favItem, index) => {
+      if (favItem.id === item.id) favList.splice(index, 1);
+    });
+    this.setState({ favList });
+  };
+
   fetchPicError = (item, e) => {
     this.error = true;
     e.target.src = item.reserveLogoUrl;
   };
-
-  loadingPic = (item, e) => {};
 
   render() {
     const { addFavDialogVisible, favList, favMenuVisible, menuProps } = this.state;
@@ -84,7 +92,7 @@ export default class FavList extends Component {
         {favList.map((item) => {
           return (
             <a
-              className="w-1/5 px-3 py-5 flex flex-col items-center rounded-md hover:bg-main-200 hover:dark:bg-main-800 cursor-pointer duration-100 ease-in-out"
+              className="w-1/5 px-3 py-5 flex flex-col items-center rounded-md hover:bg-main-200 hover:dark:bg-main-800 cursor-pointer duration-100 ease-in-out  focus:bg-main-200 focus:dark:bg-main-800"
               key={item.id}
               href={`https://${item.url}`}
               onMouseDown={(e) => this.rightClickHandler(item, e)}
@@ -93,7 +101,6 @@ export default class FavList extends Component {
                 <img
                   src={`https://${item.logoUrl}`}
                   onError={(e) => this.fetchPicError(item, e)}
-                  onLoad={(e) => this.loadingPic(item, e)}
                   alt=""
                   className="w-6 h-6"
                 />
@@ -118,7 +125,7 @@ export default class FavList extends Component {
 
         {/* Add fav item dialog */}
         {addFavDialogVisible ? (
-          <AddFavDialog
+          <FavDialog
             switchAddFavDialogVisible={this.switchAddFavDialogVisible}
             addItemtoFavList={this.addItemtoFavList}
           />
@@ -128,7 +135,11 @@ export default class FavList extends Component {
 
         {/* Setting fav item right click menu */}
         {favMenuVisible ? (
-          <SettingMenu menuProps={menuProps} switchMenuVisible={this.switchMenuVisible} />
+          <SettingMenu
+            menuProps={menuProps}
+            switchMenuVisible={this.switchMenuVisible}
+            deleteItemformFavList={this.deleteItemformFavList}
+          />
         ) : (
           ""
         )}

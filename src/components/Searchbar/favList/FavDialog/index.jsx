@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
+
 import HelpIcon from "../../../../icons/help";
 import Help from "./Help";
 import "./index.scss";

@@ -9,6 +9,11 @@ export default class SetMenu extends Component {
     this.props.switchMenuVisible(false);
   };
 
+  deleteFavItem = () => {
+    this.props.deleteItemformFavList(this.props.menuProps.item);
+    this.props.switchMenuVisible(false);
+  };
+
   render() {
     const { x, y } = this.props.menuProps;
 
@@ -26,7 +31,8 @@ export default class SetMenu extends Component {
               </div>
               Modify
             </div>
-            <div className="menu_item">
+
+            <div className="menu_item" onClick={this.deleteFavItem}>
               <div className="mr-3">
                 <DeleteIcon />
               </div>
