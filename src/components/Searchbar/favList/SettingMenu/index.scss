@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+  .menu_container {
+    @apply w-screen h-screen fixed top-0 left-0 z-50;
+
+    .menu_card {
+      @apply absolute p-2 rounded-md shadow-xl bg-main-200 dark:bg-main-800;
+
+      .menu {
+        @apply flex flex-col;
+
+        .menu_item {
+          @apply py-2 pl-3 pr-6 dark:text-main-200 hover:dark:bg-main-700 hover:opacity-75 rounded-md cursor-pointer flex text-sm duration-100;
+        }
+      }
+    }
+  }
+}
