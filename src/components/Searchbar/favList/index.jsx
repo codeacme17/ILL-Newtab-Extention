@@ -52,6 +52,7 @@ export default class FavList extends Component {
   };
 
   switchFavDialogVisible = (flag, type) => {
+    if (this.state.favList.length.length >= 19 && type === "add") return;
     this.setState({ favDialogVisible: flag, dialogType: type });
   };
 
@@ -105,12 +106,12 @@ export default class FavList extends Component {
             <a
               className="w-1/5 px-3 py-5 flex flex-col items-center rounded-md hover:bg-main-200 hover:dark:bg-main-800 cursor-pointer duration-100 ease-in-out  focus:bg-main-200 focus:dark:bg-main-800"
               key={item.id}
-              href={`https://${item.url}`}
+              href={`${item.url}`}
               onMouseDown={(e) => this.rightClickHandler(item, e)}
             >
               <div className="w-12 h-12 rounded-full bg-main-300 dark:bg-main-700 flex justify-center items-center">
                 <img
-                  src={`https://${item.logoUrl}`}
+                  src={`${item.logoUrl}`}
                   onError={(e) => this.fetchPicError(item, e)}
                   alt=""
                   className="w-6 h-6"
@@ -127,6 +128,7 @@ export default class FavList extends Component {
         <div
           className="w-1/5 px-3 py-5 flex flex-col items-center rounded-md hover:bg-main-200 hover:dark:bg-main-800 cursor-pointer"
           onClick={() => this.switchFavDialogVisible(true, "add")}
+          data-disabled={favList.length >= 19}
         >
           <div className="w-12 h-12 rounded-full bg-main-300 dark:bg-main-700 flex justify-center items-center">
             <PlusIcon />

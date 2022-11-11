@@ -21,8 +21,8 @@ export default class Help extends Component {
               What is <span className="text-emerald-500 font-semibold italic">Title</span> ?
             </div>
             <div className="dark:text-main-100">
-              Title is a shortcut to the identity of the name, you can customize it for easy
-              recognition of your shortcut.
+              Title is a string that can represent your favorite link. The title you set will be
+              displayed under the logo.
             </div>
           </div>
         ) : (
@@ -35,8 +35,9 @@ export default class Help extends Component {
               What is <span className="text-emerald-500 font-semibold italic">URL</span> ?
             </div>
             <div className="dark:text-main-100">
-              Title is a shortcut to the identity of the name, you can customize it for easy
-              recognition of your shortcut.
+              URL is the address of your favorite website.
+              <br />
+              To set it, you can directly click the label to jump to the corresponding page.
             </div>
           </div>
         ) : (

@@ -178,7 +178,7 @@ export default class FavDialog extends Component {
                 ref={this.UrlRef}
                 type="text"
                 data-url
-                placeholder="www.google.com"
+                placeholder="https://www.google.com"
                 onFocus={() => this.switchHelpType("url")}
                 onChange={(e) => this.changeInputHandler("url", e.target.value)}
               />
@@ -196,7 +196,7 @@ export default class FavDialog extends Component {
               <input
                 ref={this.LogoUrlRef}
                 type="text"
-                placeholder="www.google.com/favicon.ico"
+                placeholder="https://www.google.com/favicon.ico"
                 onFocus={() => this.switchHelpType("logoUrl")}
                 onChange={(e) => this.changeInputHandler("logoUrl", e.target.value)}
               />

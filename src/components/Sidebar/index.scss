@@ -6,12 +6,6 @@
     width: 370px;
     @apply pr-1 p-2 mt-16 fixed right-0 top-0 bottom-10 overflow-y-scroll flex flex-col items-center rounded-lg z-10;
 
-    &::-webkit-scrollbar {
-      @apply bg-none w-1;
-    }
-    &::-webkit-scrollbar-thumb {
-      @apply bg-main-400 dark:bg-main-600 rounded-xl;
-    }
     &:has(.react-draggable-dragging) {
       background-color: rgba(153, 153, 153, 0.082);
       backdrop-filter: blur(3px);

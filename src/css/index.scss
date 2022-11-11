@@ -1,28 +1,48 @@
 @import "./tailwind.scss";
+@tailwind components;
 
-html {
-  transition: background-color 0.3s ease-in-out;
-  background-color: #f7f7f7;
-  &.dark {
-    background-color: #1e1e1e;
+@layer components {
+  html {
+    transition: background-color 0.3s ease-in-out;
+    background-color: #f7f7f7;
+    &.dark {
+      background-color: #1e1e1e;
+    }
   }
-}
 
-body {
-  font-family: "poppins";
-}
-
-button {
-  transition: opacity 0.2s ease-in-out;
-  &:hover {
-    opacity: 0.8;
+  body {
+    font-family: "poppins";
   }
-}
 
-:disabled {
-  cursor: not-allowed;
-  opacity: 0.4;
-  &:hover {
+  * {
+    &::-webkit-scrollbar {
+      @apply w-1 bg-none;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-main-400 dark:bg-main-600 rounded-xl;
+    }
+  }
+
+  button {
+    transition: opacity 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  :disabled {
+    cursor: not-allowed;
     opacity: 0.4;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+
+  [data-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.4;
+    &:hover {
+      background: transparent !important;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 
 import FavList from "./FavList";
 import SearchIcon from "icons/search";
@@ -23,6 +23,7 @@ export default class Search extends Component {
   state = {
     searchEngine: this.BING_URL,
     favListVisible: true,
+    logoUrl: "",
   };
 
   // Mount search engine
@@ -53,13 +54,33 @@ export default class Search extends Component {
     this.setLocalData();
   };
 
-  // Search Event
-  InputRef = createRef();
-  search = (e) => {
-    let inputValue = this.InputRef.current.value;
+  // onchange event handler in search input element
+  inputChangeHandler = (inputValue) => {
+    this.checkIsShortKey(inputValue);
+  };
+  checkIsShortKey = (inputValue) => {
+    this.getLocalData();
+    this.setState({ logoUrl: "" });
+    this.searchUrl = "";
+    const favList = this.localData.fav.favList;
+    favList.forEach((item) => {
+      if (item.shortKey.toLowerCase() === inputValue.toLowerCase()) {
+        this.setState({ logoUrl: item.logoUrl || item.reserveLogoUrl });
+        this.searchUrl = item.url;
+      }
+    });
+  };
+
+  // onkeyup event handler in search input element
+  inputKeyupHandler = (e) => {
+    let inputValue = e.target.value;
     if (e.keyCode === 13 && inputValue.trim()) {
-      window.location = this.state.searchEngine + inputValue;
+      this.search(inputValue);
     }
+  };
+  search = (inputValue) => {
+    if (!!this.searchUrl) window.location = `${this.searchUrl}`;
+    else window.location = this.state.searchEngine + inputValue;
   };
 
   // Switch FavList component visible state
@@ -71,7 +92,7 @@ export default class Search extends Component {
   };
 
   render() {
-    const { searchEngine, favListVisible } = this.state;
+    const { searchEngine, favListVisible, logoUrl } = this.state;
 
     return (
       <section className="w-[620px] mx-auto flex flex-col relative">
@@ -83,18 +104,18 @@ export default class Search extends Component {
         >
           {/* Search Input */}
           <label className="relative block z-10">
-            <span className="absolute top-3 left-3.5">
-              <SearchIcon />
+            <span className="absolute top-3 left-4">
+              {!!logoUrl ? <img src={`${logoUrl}`} alt="" className="w-6 h-6" /> : <SearchIcon />}
             </span>
 
             {/* Input bar */}
             <input
               type="text"
-              className="w-full h-12 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
+              className="w-full h-12 pl-[53px] pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
               placeholder="SEARCH YOU WANT"
               style={{ fontSize: "16px" }}
-              ref={this.InputRef}
-              onKeyUp={this.search}
+              onKeyUp={(e) => this.inputKeyupHandler(e)}
+              onChange={(e) => this.inputChangeHandler(e.target.value)}
             />
 
             {/* Search engine btns */}
@@ -144,13 +165,13 @@ export default class Search extends Component {
         </div>
 
         {/* Fav List */}
-        {favListVisible ? (
-          <div className="mt-10">
-            <FavList />
-          </div>
-        ) : (
-          ""
-        )}
+        <div
+          className={`mt-10 overflow-y-scroll duration-300 ease-in-out transition-[opacity] ${
+            favListVisible ? "h-64 opacity-100" : "h-0 opacity-0"
+          }`}
+        >
+          <FavList />
+        </div>
       </section>
     );
   }
