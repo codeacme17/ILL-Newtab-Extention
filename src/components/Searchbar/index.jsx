@@ -29,6 +29,7 @@ export default class Search extends Component {
   componentDidMount = () => {
     this.getLocalData();
     this.switchSearchEngine(this.localData.searchEngine);
+    this.setState({ favListVisible: this.localData.fav.open });
   };
 
   // Switch search engine
@@ -63,7 +64,10 @@ export default class Search extends Component {
 
   // Switch FavList component visible state
   switchFavListVisible = () => {
+    this.getLocalData();
+    this.localData.fav.open = !this.state.favListVisible;
     this.setState({ favListVisible: !this.state.favListVisible });
+    this.setLocalData();
   };
 
   render() {
@@ -83,6 +87,7 @@ export default class Search extends Component {
               <SearchIcon />
             </span>
 
+            {/* Input bar */}
             <input
               type="text"
               className="w-full h-12 pl-12 pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
@@ -92,6 +97,7 @@ export default class Search extends Component {
               onKeyUp={this.search}
             />
 
+            {/* Search engine btns */}
             <div className="absolute top-3 right-3 flex items-center ease-in-out duration-300 transition-[fill,opacity]">
               <button
                 className={`mr-2 ${

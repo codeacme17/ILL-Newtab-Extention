@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { nanoid } from "nanoid";
 
 import Searchbar from "./components/Searchbar";
 import Topbar from "./components/Topbar";
@@ -32,6 +33,43 @@ export default class App extends Component {
         weather: { open: true },
         todo: { open: true, list: [] },
         calendar: { open: true },
+        fav: {
+          open: false,
+          favList: [
+            {
+              id: nanoid(),
+              title: "React",
+              url: "reactjs.org",
+              logoUrl: "reactjs.org/favicon.ico",
+              shortKey: "react",
+              reserveLogoUrl: "",
+            },
+            {
+              id: nanoid(),
+              title: "TailwindCSS",
+              url: "www.tailwindcss.com",
+              logoUrl: "tailwindcss.com/favicons/android-chrome-192x192.png?v=3",
+              shortKey: "tailwind",
+              reserveLogoUrl: "",
+            },
+            {
+              id: nanoid(),
+              title: "Webpack",
+              url: "webpack.js.org",
+              logoUrl: "webpack.js.org/favicon.f326220248556af65f41.ico",
+              shortKey: "webpack",
+              reserveLogoUrl: "",
+            },
+            {
+              id: nanoid(),
+              title: "Axios",
+              url: "axios-http.com/docs/intro",
+              logoUrl: "axios-http.com/assets/favicon.ico",
+              shortKey: "axios",
+              reserveLogoUrl: "",
+            },
+          ],
+        },
       };
       this.setLocalData();
     }

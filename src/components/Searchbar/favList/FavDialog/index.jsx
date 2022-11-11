@@ -177,6 +177,7 @@ export default class FavDialog extends Component {
               <input
                 ref={this.UrlRef}
                 type="text"
+                data-url
                 placeholder="www.google.com"
                 onFocus={() => this.switchHelpType("url")}
                 onChange={(e) => this.changeInputHandler("url", e.target.value)}

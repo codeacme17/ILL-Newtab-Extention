@@ -1,47 +1,21 @@
 import React, { Component, createRef } from "react";
-import { nanoid } from "nanoid";
 
 import FavDialog from "./FavDialog";
 import SettingMenu from "./SettingMenu";
 import PlusIcon from "icons/plus";
 
 export default class FavList extends Component {
+  getLocalData = () => {
+    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
+  };
+
+  setLocalData = () => {
+    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
+  };
+
   state = {
+    favList: [],
     favDialogVisible: false,
-    favList: [
-      {
-        id: nanoid(),
-        title: "React",
-        url: "reactjs.org",
-        logoUrl: "reactjs.org/favicon.ico",
-        shortKey: "react",
-        reserveLogoUrl: "",
-      },
-      {
-        id: nanoid(),
-        title: "TailwindCSS",
-        url: "www.tailwindcss.com",
-        logoUrl: "tailwindcss.com/favicons/android-chrome-192x192.png?v=3",
-        shortKey: "tailwind",
-        reserveLogoUrl: "",
-      },
-      {
-        id: nanoid(),
-        title: "Webpack",
-        url: "webpack.js.org",
-        logoUrl: "webpack.js.org/favicon.f326220248556af65f41.ico",
-        shortKey: "webpack",
-        reserveLogoUrl: "",
-      },
-      {
-        id: nanoid(),
-        title: "Axios",
-        url: "axios-http.com/docs/intro",
-        logoUrl: "axios-http.com/assets/favicon.ico",
-        shortKey: "axios",
-        reserveLogoUrl: "",
-      },
-    ],
     dialogType: "",
     favMenuVisible: false,
     menuProps: {
@@ -57,6 +31,9 @@ export default class FavList extends Component {
     this.FavListRef.current.oncontextmenu = function (e) {
       e.preventDefault();
     };
+    this.getLocalData();
+    const fav = this.localData.fav;
+    this.setState({ favList: fav.favList });
   }
 
   switchMenuVisible = (flag) => {
@@ -80,27 +57,36 @@ export default class FavList extends Component {
 
   // Push fav item to the fav list
   addItemtoFavList = (item) => {
+    this.getLocalData();
     let favList = this.state.favList;
     favList.push(item);
+    this.localData.fav.favList = favList;
     this.setState(favList);
+    this.setLocalData();
   };
 
   // Modify fav item from fav list
   modifyItemFormFavList = (item) => {
+    this.getLocalData();
     const favList = this.state.favList;
     favList.forEach((favItem, index) => {
       if (favItem.id === item.id) favList[index] = item;
     });
+    this.localData.fav.favList = favList;
     this.setState({ favList });
+    this.setLocalData();
   };
 
   // Delete fav item from fav list
   deleteItemformFavList = (item) => {
+    this.getLocalData();
     const favList = this.state.favList;
     favList.forEach((favItem, index) => {
       if (favItem.id === item.id) favList.splice(index, 1);
     });
+    this.localData.fav.favList = favList;
     this.setState({ favList });
+    this.setLocalData();
   };
 
   fetchPicError = (item, e) => {
@@ -164,10 +150,10 @@ export default class FavList extends Component {
         {/* Setting fav item right click menu */}
         {favMenuVisible ? (
           <SettingMenu
-            menuProps={menuProps}
             switchMenuVisible={this.switchMenuVisible}
             deleteItemformFavList={this.deleteItemformFavList}
             switchFavDialogVisible={this.switchFavDialogVisible}
+            menuProps={menuProps}
           />
         ) : (
           ""

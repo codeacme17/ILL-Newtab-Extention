@@ -25,6 +25,18 @@
         input {
           @apply w-full outline-none rounded-md px-3 py-1.5 bg-main-100 dark:bg-main-700 shadow-inner text-main-900 dark:text-main-100 placeholder:text-sm placeholder:text-main-300 placeholder:dark:text-main-500;
         }
+
+        &[data-url] {
+          input {
+            padding-left: 50px !important;
+            @apply relative;
+          }
+
+          &::after {
+            content: "https://";
+            @apply absolute left-0 w-10 h-6 block;
+          }
+        }
       }
     }
   }
