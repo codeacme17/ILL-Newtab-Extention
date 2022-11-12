@@ -133,7 +133,7 @@ export default class FavDialog extends Component {
     const { dialogType } = this.props;
 
     return (
-      <section className="dialog_container" onClick={this.closeDialog} id="dialog_container">
+      <section className="dialog_container" onMouseDown={this.closeDialog} id="dialog_container">
         {/* Add new item container */}
         <div className="dialog_card">
           <div

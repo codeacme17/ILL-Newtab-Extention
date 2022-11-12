@@ -38,6 +38,14 @@ export default class App extends Component {
           favList: [
             {
               id: nanoid(),
+              title: "Made By :",
+              url: "https://github.com/codeacme17/New-tab-chrome-extention",
+              logoUrl: "https://github.githubassets.com/favicons/favicon-dark.png",
+              shortKey: "",
+              reserveLogoUrl: "",
+            },
+            {
+              id: nanoid(),
               title: "React",
               url: "https://reactjs.org",
               logoUrl: "https://reactjs.org/favicon.ico",
@@ -58,14 +66,6 @@ export default class App extends Component {
               url: "https://webpack.js.org",
               logoUrl: "https://webpack.js.org/favicon.f326220248556af65f41.ico",
               shortKey: "webpack",
-              reserveLogoUrl: "",
-            },
-            {
-              id: nanoid(),
-              title: "Axios",
-              url: "https://axios-http.com/docs/intro",
-              logoUrl: "https://axios-http.com/assets/favicon.ico",
-              shortKey: "axios",
               reserveLogoUrl: "",
             },
           ],
@@ -99,7 +99,7 @@ export default class App extends Component {
         <Sidebar sidebarVisible={this.state.sidebarVisible} />
 
         {/* Footer Sign */}
-        <div className="absolute right-2 bottom-2 italic text-sm text-main-600 dark:text-main-400">
+        <div className="fixed right-2 bottom-2 italic text-sm text-main-600 dark:text-main-400">
           made by
           <a
             href="https://github.com/codeacme17"

@@ -52,7 +52,7 @@ export default class FavList extends Component {
   };
 
   switchFavDialogVisible = (flag, type) => {
-    if (this.state.favList.length.length >= 19 && type === "add") return;
+    if (this.state.favList.length >= 19 && type === "add") return;
     this.setState({ favDialogVisible: flag, dialogType: type });
   };
 

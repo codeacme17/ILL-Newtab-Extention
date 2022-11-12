@@ -58,13 +58,14 @@ export default class Search extends Component {
   inputChangeHandler = (inputValue) => {
     this.checkIsShortKey(inputValue);
   };
+  // Check the value of user inputted is or not a short key
   checkIsShortKey = (inputValue) => {
     this.getLocalData();
     this.setState({ logoUrl: "" });
     this.searchUrl = "";
     const favList = this.localData.fav.favList;
     favList.forEach((item) => {
-      if (item.shortKey.toLowerCase() === inputValue.toLowerCase()) {
+      if (item.shortKey.toLowerCase() === inputValue.toLowerCase() && !!inputValue.trim()) {
         this.setState({ logoUrl: item.logoUrl || item.reserveLogoUrl });
         this.searchUrl = item.url;
       }
@@ -167,7 +168,7 @@ export default class Search extends Component {
         {/* Fav List */}
         <div
           className={`mt-10 overflow-y-scroll duration-300 ease-in-out transition-[opacity] ${
-            favListVisible ? "h-64 opacity-100" : "h-0 opacity-0"
+            favListVisible ? "opacity-100" : "h-0 opacity-0"
           }`}
         >
           <FavList />
