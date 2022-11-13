@@ -7,7 +7,8 @@
 
     .dialog_card {
       animation: slider 0.2s ease-in-out;
-      @apply flex mt-[120px];
+      margin-top: 120px;
+      @apply flex;
 
       .form_input {
         @apply mt-2;
@@ -15,6 +16,7 @@
         label {
           @apply block text-sm mb-1 select-none;
         }
+
         label[aria-required] {
           &::after {
             content: "*";
