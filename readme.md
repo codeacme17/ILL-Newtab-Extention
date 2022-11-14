@@ -4,7 +4,7 @@ It's a chrome extention to create a new tab.
 
 > Inspiration from window11 and macOS notice bar.
 
-<!-- ## What we have ?
+## What we have ?
 
 In the first release version, we only have 3 tools.
 They are: - Weather - Calendar - Todo list.
@@ -16,4 +16,4 @@ It's a simple weather component, and the API is from https://www.qweather.com/ (
 
 ### Calendar Tool
 
-I made this tool by using the three-part react plugin called "react-calendar". -->
+I made this tool by using the three-part react plugin called "react-calendar".
