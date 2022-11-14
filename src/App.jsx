@@ -16,7 +16,20 @@ export default class App extends Component {
 
   constructor() {
     super();
-    // Init local storage data
+    this.initLocalData();
+  }
+
+  state = {
+    sidebarVisible: false,
+  };
+
+  componentDidMount = () => {
+    this.getLocalData();
+    this.setState({ sidebarVisible: this.localData.sidebar.open });
+  };
+
+  // Init local storage data
+  initLocalData = () => {
     this.getLocalData();
     if (!this.localData) {
       this.localData = {
@@ -73,15 +86,6 @@ export default class App extends Component {
       };
       this.setLocalData();
     }
-  }
-
-  state = {
-    sidebarVisible: false,
-  };
-
-  componentDidMount = () => {
-    this.getLocalData();
-    this.setState({ sidebarVisible: this.localData.sidebar.open });
   };
 
   switchSiderbarVisible = (sidebarVisible) => {

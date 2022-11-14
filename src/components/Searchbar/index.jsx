@@ -31,6 +31,18 @@ export default class Search extends Component {
     this.getLocalData();
     this.switchSearchEngine(this.localData.searchEngine);
     this.setState({ favListVisible: this.localData.fav.open });
+    this.keyPressHandler();
+  };
+
+  keyPressHandler = () => {
+    window.addEventListener("keydown", (e) => {
+      this.isCtrlOrCommit = e.ctrlKey;
+      if (this.isCtrlOrCommit && e.key === "k") {
+        e.preventDefault();
+        this.searchRef.focus();
+      }
+      this.isCtrlOrCommit = false;
+    });
   };
 
   // Switch search engine
@@ -114,6 +126,7 @@ export default class Search extends Component {
               type="text"
               className="w-full h-12 pl-[53px] pr-32 text-dark-300 outline-none rounded-3xl ease-in-out duration-200 dark:text-main-400 border-[1px] border-black shadow-inner dark:border-main-500 dark:bg-main-800 placeholder:text-sm placeholder:leading-12 placeholder:text-dark-100 dark:placeholder:text-main-600 focus:rounded-md"
               placeholder="SEARCH YOU WANT"
+              ref={(c) => (this.searchRef = c)}
               style={{ fontSize: "16px" }}
               onKeyUp={(e) => this.inputKeyupHandler(e)}
               onChange={(e) => this.inputChangeHandler(e.target.value)}
