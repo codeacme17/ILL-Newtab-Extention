@@ -28,20 +28,20 @@ export default class Search extends Component {
 
   // Mount search engine
   componentDidMount = () => {
+    this.keyPressHandler();
     this.getLocalData();
     this.switchSearchEngine(this.localData.searchEngine);
     this.setState({ favListVisible: this.localData.fav.open });
-    this.keyPressHandler();
   };
 
   keyPressHandler = () => {
     window.addEventListener("keydown", (e) => {
-      this.isCtrlOrCommit = e.ctrlKey;
-      if (this.isCtrlOrCommit && e.key === "k") {
+      this.isCtrlOrCommand = e.ctrlKey;
+      if (this.isCtrlOrCommand && e.key === "k") {
         e.preventDefault();
         this.searchRef.focus();
       }
-      this.isCtrlOrCommit = false;
+      this.isCtrlOrCommand = false;
     });
   };
 
