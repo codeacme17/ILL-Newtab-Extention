@@ -1,7 +1,7 @@
 {
-  "name": "React Google Tab",
+  "name": "1LL Tab",
   "description": "",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "manifest_version": 3,
   "permissions": ["tabCapture", "tabs", "activeTab"],
   "background": {},
