@@ -1,6 +1,6 @@
 {
-  "name": "1LL Tab",
-  "description": "",
+  "name": "1ll Tab",
+  "description": "It's to create a new tab like google tab",
   "version": "1.1.1",
   "manifest_version": 3,
   "permissions": ["tabCapture", "tabs", "activeTab"],
@@ -9,9 +9,9 @@
     "newtab": "./index.html"
   },
   "icons": {
-    "128": "./icon/google-128.png",
     "16": "./icon/google-16.png",
     "32": "./icon/google-32.png",
-    "48": "./icon/google-48.png"
+    "48": "./icon/google-48.png",
+    "128": "./icon/google-128.png"
   }
 }
