@@ -81,9 +81,9 @@ export default class Search extends StorageContainer {
   };
 
   // onkeyup event handler in search input element
-  inputKeyupHandler = (e) => {
+  inputKeyDownHandler = (e) => {
     let inputValue = e.target.value;
-    if (e.keyCode === 13 && inputValue.trim()) {
+    if (e.keyCode === 13 && e.keyCode !== 229 && inputValue.trim()) {
       this.search(inputValue);
     }
   };
@@ -128,7 +128,7 @@ export default class Search extends StorageContainer {
               placeholder="SEARCH YOU WANT"
               ref={(c) => (this.searchRef = c)}
               style={{ fontSize: "16px" }}
-              onKeyUp={(e) => this.inputKeyupHandler(e)}
+              onKeyDown={(e) => this.inputKeyDownHandler(e)}
               onChange={(e) => this.inputChangeHandler(e.target.value)}
             />
 
