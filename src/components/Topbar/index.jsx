@@ -1,6 +1,6 @@
 import React from "react";
 
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 import SunIcon from "icons/sun";
 import MoonIcon from "icons/moon";
 import SideListIcon from "icons/sidelist";

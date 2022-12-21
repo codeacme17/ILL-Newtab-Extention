@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 import ArrowupIcon from "icons/arrowup";
 import LoadingIcon from "icons/loading";
 import { GetWeather } from "apis";

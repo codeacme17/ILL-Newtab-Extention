@@ -1,6 +1,6 @@
 import React from "react";
 
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 import FavList from "./FavList";
 import SearchIcon from "icons/search";
 import BingIcon from "icons/bing";

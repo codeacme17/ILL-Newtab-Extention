@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import Draggable from "react-draggable";
 
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 import Todo from "./Todo";
 import Calendar from "./Calendar";
 import Weather from "./Weather";

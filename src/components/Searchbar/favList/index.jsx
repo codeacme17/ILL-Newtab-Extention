@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 import FavDialog from "./FavDialog";
 import SettingMenu from "./SettingMenu";
 import PlusIcon from "icons/plus";

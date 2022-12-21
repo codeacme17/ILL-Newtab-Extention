@@ -1,6 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 
 import ArrowupIcon from "icons/arrowup";
 import DeleteIcon from "icons/delete";

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { nanoid } from "nanoid";
 
-import StorageContainer from "components/StorageContainer";
+import StorageContainer from "container/Storage";
 import Searchbar from "./components/Searchbar";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
