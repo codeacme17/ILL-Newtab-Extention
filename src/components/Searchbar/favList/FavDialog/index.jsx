@@ -24,7 +24,10 @@ export default class FavDialog extends Component {
     if (this.props.dialogType === "modify") {
       this.setState({ favItem: this.props.itemProps });
       this.modifyInputByProps();
-      this.checkBtnDisabled(this.props.itemProps["title"], this.props.itemProps["url"]);
+      this.checkBtnDisabled(
+        this.props.itemProps["title"],
+        this.props.itemProps["url"]
+      );
     }
   }
 
@@ -80,7 +83,13 @@ export default class FavDialog extends Component {
     canvas.height = 28;
 
     const bgCtx = canvas.getContext("2d");
-    bgCtx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, 2 * Math.PI);
+    bgCtx.arc(
+      canvas.width / 2,
+      canvas.height / 2,
+      canvas.width / 2,
+      0,
+      2 * Math.PI
+    );
     bgCtx.fillStyle = `hsl(${Math.random() * 1000}, 70%, 50%)`;
     bgCtx.fill();
 
@@ -114,7 +123,8 @@ export default class FavDialog extends Component {
   // Close dialog (mask layer only)
   // emit to the parent's favDialogVisible property
   closeDialog = (e) => {
-    if (e.target.id === "dialog_container") this.props.switchFavDialogVisible(false);
+    if (e.target.id === "dialog_container")
+      this.props.switchFavDialogVisible(false);
   };
 
   // Switch the visiblity of help component
@@ -133,7 +143,11 @@ export default class FavDialog extends Component {
     const { dialogType } = this.props;
 
     return (
-      <section className="dialog_container" onMouseDown={this.closeDialog} id="dialog_container">
+      <section
+        className="dialog_container"
+        onMouseDown={this.closeDialog}
+        id="dialog_container"
+      >
         {/* Add new item container */}
         <div className="dialog_card">
           <div
@@ -160,7 +174,9 @@ export default class FavDialog extends Component {
                 type="text"
                 placeholder="Google"
                 onFocus={() => this.switchHelpType("title")}
-                onChange={(e) => this.changeInputHandler("title", e.target.value)}
+                onChange={(e) =>
+                  this.changeInputHandler("title", e.target.value)
+                }
               />
             </div>
 
@@ -198,7 +214,9 @@ export default class FavDialog extends Component {
                 type="text"
                 placeholder="https://www.google.com/favicon.ico"
                 onFocus={() => this.switchHelpType("logoUrl")}
-                onChange={(e) => this.changeInputHandler("logoUrl", e.target.value)}
+                onChange={(e) =>
+                  this.changeInputHandler("logoUrl", e.target.value)
+                }
               />
             </div>
 
@@ -216,7 +234,9 @@ export default class FavDialog extends Component {
                 type="text"
                 placeholder="G"
                 onFocus={() => this.switchHelpType("shortKey")}
-                onChange={(e) => this.changeInputHandler("shortKey", e.target.value)}
+                onChange={(e) =>
+                  this.changeInputHandler("shortKey", e.target.value)
+                }
               />
             </div>
 
@@ -231,7 +251,10 @@ export default class FavDialog extends Component {
               </button>
 
               {dialogType === "add" ? (
-                <button className="ml-auto mr-3" onClick={this.switchHelpVisible}>
+                <button
+                  className="ml-auto mr-3"
+                  onClick={this.switchHelpVisible}
+                >
                   <HelpIcon />
                 </button>
               ) : (

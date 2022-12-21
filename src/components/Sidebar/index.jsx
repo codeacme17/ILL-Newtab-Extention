@@ -1,20 +1,13 @@
-import React, { Component, createRef } from "react";
+import React, { createRef } from "react";
 import Draggable from "react-draggable";
 
+import StorageContainer from "components/StorageContainer";
 import Todo from "./Todo";
 import Calendar from "./Calendar";
 import Weather from "./Weather";
 import "./index.scss";
 
-export default class Sidebar extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class Sidebar extends StorageContainer {
   componentDidMount = () => {
     this.getLocalData();
     this.setState({ sortList: this.localData.sidebar.sortList });
@@ -80,11 +73,17 @@ export default class Sidebar extends Component {
     this.state.sortList.forEach((item, j) => {
       if (j === index) return;
       // Drag up
-      if (this.currentRefOffsetTopValue - item.offsetTop - 10 < 0 && index > j) {
+      if (
+        this.currentRefOffsetTopValue - item.offsetTop - 10 < 0 &&
+        index > j
+      ) {
         this.transferItems(index, j);
       }
       // Drag down
-      if (this.currentRefOffsetTopValue - item.offsetTop - item.height + 30 > 0 && index < j) {
+      if (
+        this.currentRefOffsetTopValue - item.offsetTop - item.height + 30 > 0 &&
+        index < j
+      ) {
         this.transferItems(index++, j);
       }
     });
@@ -104,7 +103,9 @@ export default class Sidebar extends Component {
     const { sortList } = this.state;
 
     return (
-      <section className={`silder ${this.props.sidebarVisible ? "_show" : "_hide"}`}>
+      <section
+        className={`silder ${this.props.sidebarVisible ? "_show" : "_hide"}`}
+      >
         {sortList.map((item, index) => {
           if (item.type === "todo")
             return (

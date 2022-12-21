@@ -1,18 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
+import StorageContainer from "components/StorageContainer";
 import SunIcon from "icons/sun";
 import MoonIcon from "icons/moon";
 import SideListIcon from "icons/sidelist";
 
-export default class Topbar extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class Topbar extends StorageContainer {
   state = {
     sidebarVisible: false,
     darkMode: Boolean,

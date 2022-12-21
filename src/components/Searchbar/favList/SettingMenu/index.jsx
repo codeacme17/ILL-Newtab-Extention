@@ -24,7 +24,11 @@ export default class SetMenu extends Component {
     const { x, y } = this.props.menuProps;
 
     return (
-      <section className="menu_container" id="menu_container" onMouseDown={this.closeMenu}>
+      <section
+        className="menu_container"
+        id="menu_container"
+        onMouseDown={this.closeMenu}
+      >
         <div
           className="menu_card"
           id="menu_card"

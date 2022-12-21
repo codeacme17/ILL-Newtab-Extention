@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 
+import StorageContainer from "components/StorageContainer";
 import ArrowupIcon from "icons/arrowup";
 import LoadingIcon from "icons/loading";
 import { GetWeather } from "apis";
 
-export default class Weather extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class Weather extends StorageContainer {
   state = {
     detailVisible: false,
     /**
@@ -49,7 +42,9 @@ export default class Weather extends Component {
     const that = this;
     return new Promise((resolve, reject) => {
       function success(pos) {
-        let position = `${pos.coords.longitude.toFixed(2)},${pos.coords.latitude.toFixed(2)}`;
+        let position = `${pos.coords.longitude.toFixed(
+          2
+        )},${pos.coords.latitude.toFixed(2)}`;
         resolve(position);
       }
       function error(err) {
@@ -82,7 +77,8 @@ export default class Weather extends Component {
   };
 
   render() {
-    const { detailVisible, requestState, weatherData, errorMessage } = this.state;
+    const { detailVisible, requestState, weatherData, errorMessage } =
+      this.state;
 
     return (
       <section className="silder-item">
@@ -139,16 +135,21 @@ export default class Weather extends Component {
               {" "}
               <div className="mb-2">
                 Sensible Temperature :{" "}
-                <span className="font-bold ml-1">{weatherData.feelsLike} ℃</span>
+                <span className="font-bold ml-1">
+                  {weatherData.feelsLike} ℃
+                </span>
               </div>
               <div className="mb-2">
-                Rainfall : <span className="font-bold ml-1">{weatherData.precip}</span>
+                Rainfall :{" "}
+                <span className="font-bold ml-1">{weatherData.precip}</span>
               </div>
               <div className="mb-2">
-                Wind Direction : <span className="font-bold ml-1">{weatherData.windDir}</span>
+                Wind Direction :{" "}
+                <span className="font-bold ml-1">{weatherData.windDir}</span>
               </div>
               <div className="">
-                Wind Scale : <span className="font-bold ml-1">{weatherData.windScale}</span>
+                Wind Scale :{" "}
+                <span className="font-bold ml-1">{weatherData.windScale}</span>
               </div>
             </div>
           ) : (

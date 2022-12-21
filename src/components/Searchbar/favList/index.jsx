@@ -1,18 +1,11 @@
-import React, { Component, createRef } from "react";
+import React, { createRef } from "react";
 
+import StorageContainer from "components/StorageContainer";
 import FavDialog from "./FavDialog";
 import SettingMenu from "./SettingMenu";
 import PlusIcon from "icons/plus";
 
-export default class FavList extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class FavList extends StorageContainer {
   state = {
     favList: [],
     favDialogVisible: false,
@@ -96,10 +89,14 @@ export default class FavList extends Component {
   };
 
   render() {
-    const { favDialogVisible, favList, favMenuVisible, menuProps, dialogType } = this.state;
+    const { favDialogVisible, favList, favMenuVisible, menuProps, dialogType } =
+      this.state;
 
     return (
-      <section className="flex  flex-wrap text-main-700 dark:text-main-400" ref={this.FavListRef}>
+      <section
+        className="flex  flex-wrap text-main-700 dark:text-main-400"
+        ref={this.FavListRef}
+      >
         {/* Fav list item */}
         {favList.map((item) => {
           return (
@@ -133,7 +130,9 @@ export default class FavList extends Component {
           <div className="w-12 h-12 rounded-full bg-main-300 dark:bg-main-700 flex justify-center items-center">
             <PlusIcon />
           </div>
-          <div className="text-xs mt-3 overflow-hidden w-24 truncate text-center">ADD NEW</div>
+          <div className="text-xs mt-3 overflow-hidden w-24 truncate text-center">
+            ADD NEW
+          </div>
         </div>
 
         {/* Emit fav item dialog */}

@@ -18,14 +18,18 @@ export default class Help extends Component {
         {helpType === "title" ? (
           <div>
             <div className="mb-2 ">
-              What is <span className="text-emerald-500 font-semibold italic">Title</span> ?
+              What is{" "}
+              <span className="text-emerald-500 font-semibold italic">
+                Title
+              </span>{" "}
+              ?
             </div>
             <div className="dark:text-main-100">
               <span className="block italic mb-2 text-sm text-rose-500 dark:text-rose-400">
                 * required
               </span>
-              Title is a string that can represent your favorite link. The title you set will be
-              displayed under the logo.
+              Title is a string that can represent your favorite link. The title
+              you set will be displayed under the logo.
             </div>
           </div>
         ) : (
@@ -35,7 +39,9 @@ export default class Help extends Component {
         {helpType === "url" ? (
           <div>
             <div className="mb-2 ">
-              What is <span className="text-emerald-500 font-semibold italic">URL</span> ?
+              What is{" "}
+              <span className="text-emerald-500 font-semibold italic">URL</span>{" "}
+              ?
             </div>
             <div className="dark:text-main-100">
               <span className="block italic mb-2 text-sm text-rose-500 dark:text-rose-400">
@@ -43,7 +49,8 @@ export default class Help extends Component {
               </span>
               URL is the address of your favorite website.
               <br />
-              To set it, you can directly click the label to jump to the corresponding page.
+              To set it, you can directly click the label to jump to the
+              corresponding page.
             </div>
           </div>
         ) : (
@@ -53,14 +60,18 @@ export default class Help extends Component {
         {helpType === "logoUrl" ? (
           <div>
             <div className="mb-2 ">
-              What is <span className="text-emerald-500 font-semibold italic">Logo URL</span> ?
+              What is{" "}
+              <span className="text-emerald-500 font-semibold italic">
+                Logo URL
+              </span>{" "}
+              ?
             </div>
             <div className="dark:text-main-100">
-              Title is a shortcut to the identity of the name, you can customize it for easy
-              recognition of your shortcut.
+              Title is a shortcut to the identity of the name, you can customize
+              it for easy recognition of your shortcut.
               <br />
-              Of course, you can also choose not to fill in this item, which will display the
-              automatically generated logo.
+              Of course, you can also choose not to fill in this item, which
+              will display the automatically generated logo.
             </div>
           </div>
         ) : (
@@ -70,11 +81,15 @@ export default class Help extends Component {
         {helpType === "shortKey" ? (
           <div>
             <div className="mb-2 ">
-              What is <span className="text-emerald-500 font-semibold italic">Short Key</span> ?
+              What is{" "}
+              <span className="text-emerald-500 font-semibold italic">
+                Short Key
+              </span>{" "}
+              ?
             </div>
             <div className="dark:text-main-100">
-              After you fill in this item, you can enter this value in the search box to quickly
-              jump.
+              After you fill in this item, you can enter this value in the
+              search box to quickly jump.
               <br />
               That is, you will not enter the engine search.
               <video autoPlay loop muted className="mt-4 rounded-lg shadow-xl">

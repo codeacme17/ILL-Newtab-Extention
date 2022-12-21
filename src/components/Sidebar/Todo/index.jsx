@@ -1,19 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { nanoid } from "nanoid";
+import StorageContainer from "components/StorageContainer";
 
 import ArrowupIcon from "icons/arrowup";
 import DeleteIcon from "icons/delete";
 import "./index.scss";
 
-export default class Todo extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class Todo extends StorageContainer {
   state = {
     detailVisible: false,
     todoList: [],
@@ -21,7 +14,10 @@ export default class Todo extends Component {
 
   componentDidMount = () => {
     this.getLocalData();
-    this.setState({ detailVisible: this.localData.todo.open, todoList: this.localData.todo.list });
+    this.setState({
+      detailVisible: this.localData.todo.open,
+      todoList: this.localData.todo.list,
+    });
   };
 
   // Add todo task
@@ -56,7 +52,10 @@ export default class Todo extends Component {
     if (levels.indexOf(level.trim()) !== -1) {
       if (array.length === 2) return { value: array[0], level: level.trim() };
       if (array.length > 2)
-        return { value: array.slice(0, array.length - 1).join("#"), level: level.trim() };
+        return {
+          value: array.slice(0, array.length - 1).join("#"),
+          level: level.trim(),
+        };
     }
     return { value, level: "1" };
   };
@@ -100,8 +99,8 @@ export default class Todo extends Component {
               <div className="text-main-600 dark:text-main-400">
                 <p className="mb-1 text-sm">You can add some todos in here</p>
                 <span className="text-xs italic">
-                  📎 you can add # with number 1-3 in the end , to set level of the signal todo item
-                  (default " 1 ")
+                  📎 you can add # with number 1-3 in the end , to set level of
+                  the signal todo item (default " 1 ")
                 </span>
               </div>
             ) : (
@@ -115,16 +114,31 @@ export default class Todo extends Component {
                     <div className="font-semibold text-sm flex flex-1 pr-1 items-center justify-between">
                       <div
                         className={`w-1.5 h-[60%] rounded-xl pr-2 
-                        ${item.level === "1" ? "bg-gray-400 dark:bg-gray-600" : ""} 
-                        ${item.level === "2" ? "bg-sky-400 dark:bg-sky-600" : ""}
-                        ${item.level === "3" ? "bg-rose-400 dark:bg-rose-600" : ""}
+                        ${
+                          item.level === "1"
+                            ? "bg-gray-400 dark:bg-gray-600"
+                            : ""
+                        } 
+                        ${
+                          item.level === "2" ? "bg-sky-400 dark:bg-sky-600" : ""
+                        }
+                        ${
+                          item.level === "3"
+                            ? "bg-rose-400 dark:bg-rose-600"
+                            : ""
+                        }
                         `}
                       />
-                      <div className="flex-1 pl-2 break-words w-[272px]">{item.content}</div>
+                      <div className="flex-1 pl-2 break-words w-[272px]">
+                        {item.content}
+                      </div>
                     </div>
 
                     {detailVisible ? (
-                      <button className="cancel_btn" onClick={() => this.cancelTodo(index)}>
+                      <button
+                        className="cancel_btn"
+                        onClick={() => this.cancelTodo(index)}
+                      >
                         <DeleteIcon />
                       </button>
                     ) : (
@@ -138,7 +152,9 @@ export default class Todo extends Component {
 
           {/* Input text to add todo */}
           <div
-            className={`ease-in-out duration-300 ${detailVisible ? "p-3 -mt-3 h-16" : "h-0 p-0"}`}
+            className={`ease-in-out duration-300 ${
+              detailVisible ? "p-3 -mt-3 h-16" : "h-0 p-0"
+            }`}
           >
             <input
               type="text"

@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 
+import StorageContainer from "components/StorageContainer";
 import Searchbar from "./components/Searchbar";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 
-export default class App extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class App extends StorageContainer {
   constructor() {
     super();
     this.initLocalData();
@@ -53,7 +46,8 @@ export default class App extends Component {
               id: nanoid(),
               title: "Made By :",
               url: "https://github.com/codeacme17/New-tab-chrome-extention",
-              logoUrl: "https://github.githubassets.com/favicons/favicon-dark.png",
+              logoUrl:
+                "https://github.githubassets.com/favicons/favicon-dark.png",
               shortKey: "",
               reserveLogoUrl: "",
             },
@@ -69,7 +63,8 @@ export default class App extends Component {
               id: nanoid(),
               title: "TailwindCSS",
               url: "https://www.tailwindcss.com",
-              logoUrl: "https://tailwindcss.com/favicons/android-chrome-192x192.png?v=3",
+              logoUrl:
+                "https://tailwindcss.com/favicons/android-chrome-192x192.png?v=3",
               shortKey: "tailwind",
               reserveLogoUrl: "",
             },
@@ -77,7 +72,8 @@ export default class App extends Component {
               id: nanoid(),
               title: "Webpack",
               url: "https://webpack.js.org",
-              logoUrl: "https://webpack.js.org/favicon.f326220248556af65f41.ico",
+              logoUrl:
+                "https://webpack.js.org/favicon.f326220248556af65f41.ico",
               shortKey: "webpack",
               reserveLogoUrl: "",
             },

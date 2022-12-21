@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
+import StorageContainer from "components/StorageContainer";
 import FavList from "./FavList";
 import SearchIcon from "icons/search";
 import BingIcon from "icons/bing";
@@ -7,15 +8,7 @@ import GoogleIcon from "icons/google";
 import BaiduIcon from "icons/baidu";
 import ArrowdownIcon from "icons/arrowdown";
 
-export default class Search extends Component {
-  getLocalData = () => {
-    this.localData = JSON.parse(localStorage.getItem("_setting_data"));
-  };
-
-  setLocalData = () => {
-    localStorage.setItem("_setting_data", JSON.stringify(this.localData));
-  };
-
+export default class Search extends StorageContainer {
   BING_URL = "https://www.bing.com/search?q=";
   GOOGLE_URL = "https://www.google.com/search?q=";
   BAIDU_URL = "https://www.baidu.com/s?wd=";
@@ -77,7 +70,10 @@ export default class Search extends Component {
     this.searchUrl = "";
     const favList = this.localData.fav.favList;
     favList.forEach((item) => {
-      if (item.shortKey.toLowerCase() === inputValue.toLowerCase() && !!inputValue.trim()) {
+      if (
+        item.shortKey.toLowerCase() === inputValue.toLowerCase() &&
+        !!inputValue.trim()
+      ) {
         this.setState({ logoUrl: item.logoUrl || item.reserveLogoUrl });
         this.searchUrl = item.url;
       }
@@ -118,7 +114,11 @@ export default class Search extends Component {
           {/* Search Input */}
           <label className="relative block z-10">
             <span className="absolute top-3 left-4">
-              {!!logoUrl ? <img src={`${logoUrl}`} alt="" className="w-6 h-6" /> : <SearchIcon />}
+              {!!logoUrl ? (
+                <img src={`${logoUrl}`} alt="" className="w-6 h-6" />
+              ) : (
+                <SearchIcon />
+              )}
             </span>
 
             {/* Input bar */}
